@@ -1,0 +1,39 @@
+.distribuidores{
+    width:75%;
+    height: 75%;
+    margin-top: 10px;
+}
+.menu{
+    background-color: #d9dbda;
+    width: 90%;
+    margin-left: 3.7%;
+   
+}
+.navbar-default .navbar-brand{
+     color: #08088e;
+}
+.navbar-default .navbar-nav > li > a{
+    color:black;
+}
+.carousel-inner{
+    width: 75%;
+    margin-left: 11.5%;
+}
+
+.carousel-inner > .item > img{
+    width: 80%;
+    height: 80%;
+    max-height: 400px;
+    max-width: 1200px;
+}
+.carousel-caption {
+    font-size: 18px;
+}
+
+footer{
+    background-color: #d9dbda;
+    width: 75%;
+    margin-left: 11.5%;
+    border-bottom-right-radius: 5%;
+    border-bottom-left-radius: 5%;
+}
