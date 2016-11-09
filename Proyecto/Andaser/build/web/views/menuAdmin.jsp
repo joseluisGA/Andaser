@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="/struts-tags" prefix="s" %>
-  <s:if test="#session.login=='admin'">
+  
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3 col-md-3">
@@ -17,4 +17,3 @@
                     </div>
                 </div>              
             </div>            
-        </s:if>

@@ -11,9 +11,9 @@ package Modelos;
  */
 public class Usuario {
     private String nombre, password, email;
-    private Rol rol;
+    private int rol;
 
-    public Usuario(String nombre, String password, String email, Rol rol) {
+    public Usuario(String nombre, String password, String email, int rol) {
         this.nombre = nombre;
         this.password = password;
         this.email = email;
@@ -44,11 +44,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public Rol getRol() {
+    public int getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
     

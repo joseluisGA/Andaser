@@ -8,5 +8,12 @@
         <action name="adminCategoria" class="Actions.AdminCategoria">
             <result>index.jsp</result>
         </action>
+        <action name="inicio" class="Actions.Inicio">
+            <result>index.jsp</result>
+        </action>
+        <action name="login" class="Actions.Login">
+            <result name="success">galeria.jsp</result>
+            <result name="error">#accesoClientes</result>
+        </action>
     </package>
 </struts>

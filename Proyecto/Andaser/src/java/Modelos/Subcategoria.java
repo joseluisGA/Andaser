@@ -5,77 +5,53 @@
  */
 package Modelos;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
 
 /**
  *
  * @author minit
  */
-@Entity
-@Table(name="subcategoria", 
-	uniqueConstraints = {@UniqueConstraint(columnNames="nombre" )})
-public class Subcategoria {
-    private int id;
-    private Categoria categoria;
-    private String nombre;
-    private Set<Producto> producto = new HashSet<Producto>();
 
-    public Subcategoria(int id, Categoria categoria, String nombre, Set<Producto> producto) {
-        this.id = id;
-        this.categoria = categoria;
-        this.producto = producto;
-        this.nombre = nombre;
+public class Subcategoria {
+    private int id_subCat;
+    private int id_categoria;
+    private String nombreSubCat;
+   
+    
+    public Subcategoria(){
         
     }
-@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
-    public int getId() {
-        return id;
+
+    public Subcategoria(int id_subCat, int id_categoria, String nombreSubCat) {
+        this.id_subCat = id_subCat;
+        this.id_categoria = id_categoria;
+        this.nombreSubCat = nombreSubCat;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_categoria", nullable = false)
-    public Categoria getCategoria() {
-        return categoria;
+    public int getId_subCat() {
+        return id_subCat;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
- @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_subcategoria")  
-    public Set<Producto> getProducto() {
-        return producto;
+    public void setId_subCat(int id_subCat) {
+        this.id_subCat = id_subCat;
     }
 
-    public void setProducto(Set<Producto> producto) {
-        this.producto = producto;
+    public String getNombreSubCat() {
+        return nombreSubCat;
     }
 
-    
- @Column(name="nombre", unique=true, nullable=false)
-    public String getNombre() {
-        return nombre;
+    public void setNombreSubCat(String nombreSubCat) {
+        this.nombreSubCat = nombreSubCat;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public int getId_categoria() {
+        return id_categoria;
     }
-    
+
+    public void setId_categoria(int id_categoria) {
+        this.id_categoria = id_categoria;
+    }
     
 }
+   
+   

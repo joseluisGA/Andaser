@@ -5,50 +5,39 @@
  */
 package Modelos;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import java.util.ArrayList;
+
+
 
 /**
  *
  * @author minit
  */
-@Entity
-@Table(name="categoria", 
-	uniqueConstraints = {@UniqueConstraint(columnNames="nombre" )})
+
 public class Categoria {
     
     private int id;
     private String nombre;
-    private Set<Producto> producto = new HashSet<Producto>();
-    private Set<Subcategoria> subcategoria = new HashSet<Subcategoria>();
+    private ArrayList<Subcategoria> subcategoria;
+    
 
-    public Categoria(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+    public Categoria(){
+        
     }
     
-    
-    
-
-    
-    public Categoria(int id, String nombre, Set<Producto> producto, Set<Subcategoria> subcategoria) {
+    public Categoria(int id, String nombre, ArrayList<Subcategoria> subcategoria) {
         this.id = id;
         this.nombre = nombre;
-        this.producto = producto;
         this.subcategoria = subcategoria;
     }
-@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+    
+      public Categoria(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+      
+    }
+    
+
     public int getId() {
         return id;
     }
@@ -56,7 +45,7 @@ public class Categoria {
     public void setId(int id) {
         this.id = id;
     }
- @Column(name="nombre", unique=true, nullable=false)
+ 
     public String getNombre() {
         return nombre;
     }
@@ -64,24 +53,16 @@ public class Categoria {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-   @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")  
-    public Set<Producto> getProducto() {
-        return producto;
-    }
 
-    public void setProducto(Set<Producto> producto) {
-        this.producto = producto;
-    }
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")  
-    public Set<Subcategoria> getSubcategoria() {
+    public ArrayList<Subcategoria> getSubcategoria() {
         return subcategoria;
     }
 
-    public void setSubcategoria(Set<Subcategoria> subcategoria) {
+    public void setSubcategoria(ArrayList<Subcategoria> subcategoria) {
         this.subcategoria = subcategoria;
     }
-    
-    
+  
+   
     
     
     

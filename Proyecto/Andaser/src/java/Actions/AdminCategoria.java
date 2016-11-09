@@ -12,13 +12,14 @@ import Modelos.CategoriaDao;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 /**
  *
  * @author minit
  */
 public class AdminCategoria extends ActionSupport{
     private ArrayList array_Cat;
-    private Collection<Categoria> coll_Cat;
+    private List<Categoria> list_Cat;
     private String admin, vista, nombre;
     private int id;
     private CategoriaDao cDao;
@@ -31,12 +32,12 @@ public class AdminCategoria extends ActionSupport{
         this.array_Cat = array_Cat;
     }
 
-    public Collection<Categoria> getColl_Cat() {
-        return coll_Cat;
+    public Collection<Categoria> getlist_Cat() {
+        return list_Cat;
     }
 
-    public void setColl_Cat(Collection<Categoria> coll_Cat) {
-        this.coll_Cat = coll_Cat;
+    public void setlist_Cat(List<Categoria> list_Cat) {
+        this.list_Cat = list_Cat;
     }
 
     public String getAdmin() {
@@ -94,12 +95,15 @@ public class AdminCategoria extends ActionSupport{
         }
         
         if(cDao.loadAll()!=null){
-        coll_Cat = cDao.loadAll();
+        list_Cat = cDao.loadAll();
         Categoria aux = null;
-        Iterator<Categoria> it = coll_Cat.iterator();
+        Iterator<Categoria> it = list_Cat.iterator();
         while(it.hasNext()){
+            
             aux = it.next();
-            array_Cat.add(new Categoria(aux.getId(), aux.getNombre()));
+            this.id = aux.getId();
+            this.nombre = aux.getNombre();
+           
         }
         }
         return resultado;

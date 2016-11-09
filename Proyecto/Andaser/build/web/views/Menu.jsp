@@ -16,33 +16,22 @@
                     </div>
                     <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Barnices <span class="caret"></span></a>
+                            <s:iterator value="#application.aCat">
+                                
+                                <s:if test="%{subcategoria!=null}">
+                                     <li class="dropdown">
+                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><s:property value="nombre"/> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
+                                    <s:iterator value="subcategoria">
+                                        <li><a href="#"><s:property value="nombreSubCat"/></a></li>
+                                    </s:iterator>
                                 </ul>
                             </li>
-                            
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Herrajes <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Abrasivos <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Tintes</a></li>
+                                </s:if>
+                                <s:else>
+                                     <li><a href="#"><s:property value="nombre"/></a></li>
+                                </s:else>
+                                    </s:iterator>
                            
                         </ul>
                         <form class="navbar-form navbar-left">
@@ -52,7 +41,13 @@
                             <button type="submit" class="btn btn-default">Enviar</button>
                         </form>
                         <ul class="nav navbar-nav navbar-right" >
-                            <li><a href="#" style= "color:#08088e; font-weight: bold;">Acceso clientes</a></li>
+                            <s:if test="#session.usuario==null">
+                                 <li><a href="#accesoClientes" style= "color:#08088e; font-weight: bold;">Acceso clientes</a></li>
+                            </s:if>
+                                     <s:else>
+                                     <li><p  style= "color:#08088e; font-weight: bold;">Bienvenido</p><s:property value="#session.usuario.nombre"/></li>
+                                     </s:else>
+                           
                             
                         </ul>
                     </div>
