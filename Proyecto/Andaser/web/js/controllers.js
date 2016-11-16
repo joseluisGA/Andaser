@@ -22,3 +22,10 @@ mainApp.controller("acceso", ['$scope', '$http', '$location', function($scope, $
                 
                 };
 }]);
+
+mainApp.controller("adminCat", ['$scope', function($scope){
+
+
+
+
+}]);

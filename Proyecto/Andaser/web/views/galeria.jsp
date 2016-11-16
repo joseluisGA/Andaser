@@ -10,14 +10,14 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-        <img src="img/carousel/img_galeria1.png" alt="galeria1"/>
+        <img src="../img/carousel/img_galeria1.png" alt="galeria1"/>
         <div class="carousel-caption">
             <p>La mejor calidad</p>
         </div>
     </div>
 
     <div class="item">
-        <img src="img/carousel/img_galeria2.png" alt="galeria2"/>
+        <img src="../img/carousel/img_galeria2.png" alt="galeria2"/>
         <div class="carousel-caption">
             <p>Amplia gama de colores</p>
         </div>

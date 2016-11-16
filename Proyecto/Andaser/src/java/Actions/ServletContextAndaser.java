@@ -6,14 +6,13 @@
 package Actions;
 
 import Modelos.Categoria;
-import Modelos.CategoriaDao;
-import Modelos.SubCategoriaDao;
+
 import Modelos.Subcategoria;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -26,6 +25,7 @@ import javax.servlet.ServletContextListener;
  */
 public class ServletContextAndaser implements ServletContextListener{
  private ServletContext context;
+
  private ArrayList<Categoria> aCat= new ArrayList();
  ArrayList<Subcategoria> aSubCat = new ArrayList();
  private Categoria cat;
@@ -79,6 +79,7 @@ public class ServletContextAndaser implements ServletContextListener{
         
         context = sce.getServletContext();
             context.setAttribute("aCat", aCat);
+            context.setAttribute("vista", "../views/galeria.jsp");
     }
 
     @Override

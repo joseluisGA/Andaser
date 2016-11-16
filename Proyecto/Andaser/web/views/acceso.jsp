@@ -13,7 +13,7 @@
                         </div>
                         </s:if>
                             <!-- Hace el login para los usuarios, si los datos son erróneos, salta un mensaje de error.-->
-                            <<s:form action="login">
+                            <s:form action="login">
                                 
                                 <div class="form-group" >
                                     <s:textfield name="user" label="Usuario" ng-model="user.nombre" placeholder="usuario" cssClass="form-control"/>
@@ -25,8 +25,8 @@
                                     <s:submit value="Acceder" cssClass="btn btn-default" />
                                 </div>
                                
-                            </s:form>>
-                             Usuario: {{user.nombre}}  Password: {{user.password}}
+                            </s:form>
+                            
                         </div>
                     </div>
                 </div>

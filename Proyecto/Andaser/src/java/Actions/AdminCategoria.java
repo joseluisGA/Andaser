@@ -9,10 +9,14 @@ import Modelos.Categoria;
 import com.opensymphony.xwork2.ActionSupport;
 
 import Modelos.CategoriaDao;
+import com.opensymphony.xwork2.ActionContext;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author minit
@@ -23,7 +27,7 @@ public class AdminCategoria extends ActionSupport{
     private String admin, vista, nombre;
     private int id;
     private CategoriaDao cDao;
-
+    private String service;
     public ArrayList getArray_Cat() {
         return array_Cat;
     }
@@ -84,29 +88,38 @@ public class AdminCategoria extends ActionSupport{
     
     @Override
     public String execute(){
-        String resultado = SUCCESS;
-        cDao = new CategoriaDao();
-        if(admin!=null){
-            switch (admin){
-                 case ("insertar"):
-                
-                break;
+        try {
+            String resultado = SUCCESS;
+            Conexion co = new Conexion("andaser", "root", "root");
+            
+            
+            switch(service){
+                case "insertar":
+                    
+                    
+                    
+                    break;
             }
+            
+            co.getAllCategoria();
+            while (co.Obtener_Siguiente()){
+                
+                array_Cat.add(new Categoria(co.Obtener_ID_Actual("ID"),co.Obtener_Actual("NOMBRE") ));
+                
+            }
+            return resultado;
+        } catch (InstantiationException ex) {
+            Logger.getLogger(AdminCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdminCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(AdminCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if(cDao.loadAll()!=null){
-        list_Cat = cDao.loadAll();
-        Categoria aux = null;
-        Iterator<Categoria> it = list_Cat.iterator();
-        while(it.hasNext()){
-            
-            aux = it.next();
-            this.id = aux.getId();
-            this.nombre = aux.getNombre();
-           
-        }
-        }
-        return resultado;
+        ActionContext.getContext().getSession().put("vista","../views/adminCategoria.jsp");
+        return SUCCESS;
     }
     
     

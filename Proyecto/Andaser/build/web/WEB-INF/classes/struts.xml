@@ -3,17 +3,21 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+    
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
+<result-types>
+   <result-type name="dispatcher" default="true"
+                class="org.apache.struts2.dispatcher.ServletDispatcherResult" />
+</result-types>
         <action name="adminCategoria" class="Actions.AdminCategoria">
-            <result>index.jsp</result>
+            <result>../views/index.jsp</result>
         </action>
         <action name="inicio" class="Actions.Inicio">
-            <result>index.jsp</result>
+            <result>../views/index.jsp</result>
         </action>
         <action name="login" class="Actions.Login">
-            <result name="success">galeria.jsp</result>
-            <result name="error">#accesoClientes</result>
+            <result>../views/index.jsp</result>
         </action>
     </package>
 </struts>

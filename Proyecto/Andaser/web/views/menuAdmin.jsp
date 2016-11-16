@@ -7,10 +7,11 @@
                         <div class="panel-group" id="menu-admin">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <p>Administración de categorías</p>
-                                    <p>Administración de subcategorías</p>
-                                    <p>Administración de productos</p>
-                                    <p>Administración de usuarios</p>
+                                    <p><a href="#AdminCat" style= "color:#08088e; font-weight: bold;">Administrar Categorías</a></p>
+                                    <p><a href="#AdminSubcat" style= "color:#08088e; font-weight: bold;">Administrar Subcategorías</a></p>
+                                    <p><a href="#AdminPro" style= "color:#08088e; font-weight: bold;">Administrar Productos</a></p>
+                                    <p><a href="#AdminUsu" style= "color:#08088e; font-weight: bold;">Administrar Usuarios</a></p>
+                                    <p><a href="#AdminPed" style= "color:#08088e; font-weight: bold;">Administrar Pedidos</a></p>
                                 </div>
                             </div>
                         </div>

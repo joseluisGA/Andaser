@@ -1,4 +1,4 @@
-var mainApp = angular.module("mainApp", ['ngRoute'])
+var mainApp2 = angular.module("mainApp2", ['ngRoute'])
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
 	$routeProvider.
@@ -11,12 +11,6 @@ var mainApp = angular.module("mainApp", ['ngRoute'])
 		templateUrl: '../views/acceso.jsp',
 		controller: 'acceso'
 	}).
-                
-                
-         when('/AdminCat', {
-                templateUrl: '../views/adminCategoria.jsp',
-                controller: 'adminCat'
-        }).       
                 
 	otherwise({
 		redirectTo: '/inicio'
