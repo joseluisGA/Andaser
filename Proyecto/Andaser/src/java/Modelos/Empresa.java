@@ -9,36 +9,35 @@ package Modelos;
  *
  * @author minit
  */
-public class Cliente {
-    private String dni, nombre, ape1, ape2; 
+public class Empresa {
+    private String nif, nombre;
     private Usuario user;
     private Direccion dir;
 
-    public Cliente(String dni, String nombre, String ape1, String ape2) {
-        this.dni = dni;
+    public Empresa(String nif, String nombre, Direccion dir) {
+        this.nif = nif;
         this.nombre = nombre;
-        this.ape1 = ape1;
-        this.ape2 = ape2;
+        this.dir = dir;
     }
 
-    public Cliente(String dni, String nombre, String ape1, String ape2, Usuario user, Direccion dir) {
-        this.dni = dni;
+    public Empresa(String nif, String nombre, Usuario user, Direccion dir) {
+        this.nif = nif;
         this.nombre = nombre;
-        this.ape1 = ape1;
-        this.ape2 = ape2;
         this.user = user;
         this.dir = dir;
     }
 
-    public Cliente() {
+    public Empresa(String nif, String nombre) {
+        this.nif = nif;
+        this.nombre = nombre;
     }
 
-    public String getDni() {
-        return dni;
+    public String getNif() {
+        return nif;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     public String getNombre() {
@@ -47,22 +46,6 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApe1() {
-        return ape1;
-    }
-
-    public void setApe1(String ape1) {
-        this.ape1 = ape1;
-    }
-
-    public String getApe2() {
-        return ape2;
-    }
-
-    public void setApe2(String ape2) {
-        this.ape2 = ape2;
     }
 
     public Usuario getUser() {

@@ -5,19 +5,29 @@
 <struts>
     
     <!-- Configuration for the default package. -->
-    <package name="default" extends="struts-default">
+    <package name="default" namespace="/" extends="struts-default">
+        
 <result-types>
    <result-type name="dispatcher" default="true"
                 class="org.apache.struts2.dispatcher.ServletDispatcherResult" />
 </result-types>
         <action name="adminCategoria" class="Actions.AdminCategoria">
-            <result>../views/index.jsp</result>
+            <result type="dispatcher">/index.jsp</result>
         </action>
         <action name="inicio" class="Actions.Inicio">
-            <result>../views/index.jsp</result>
+            <result type="dispatcher">/index.jsp</result>
         </action>
         <action name="login" class="Actions.Login">
-            <result>../views/index.jsp</result>
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="LogOut" class="Actions.LogOut">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="Redireccion" class="Actions.Redirect">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="registro" class="Actions.Registro">
+            <result type="dispatcher">/index.jsp</result>
         </action>
     </package>
 </struts>

@@ -55,17 +55,22 @@ public class Login extends ActionSupport{
                 usuario = new Usuario(co.Obtener_Actual("NOMBRE"), co.Obtener_Actual("PASSWORD"), co.Obtener_Actual("EMAIL"), co.Obtener_ID_Actual("ROL"));
                 ActionContext.getContext().getSession().put("usuario", this.usuario);
                 ActionContext.getContext().getSession().put("errorlogin", null);
-                if(co.Obtener_ID_Actual("ContrasenyaCambiada")==0){
+                if(co.Obtener_ID_Actual("CONTRASENYACAMBIADA")==0){
                     ActionContext.getContext().getSession().put("PassCambiada", 0);
-                    context.setAttribute("vista", "../views/cambiarPass.jsp");
+                    context.setAttribute("vista", "views/cambiarPass.jsp");
                    
                 }
                 else{
-                context.setAttribute("vista", "../views/index.jsp");
+                        if(!user.equals("admin")){
+                        context.setAttribute("vista", "views/galeria.jsp");
+                    }
+                    else{
+                        context.setAttribute("vista", null);
+                    }
                 }
             }
             else{
-                 context.setAttribute("vista", "../views/acceso.jsp");
+                 context.setAttribute("vista", "views/acceso.jsp");
                 ActionContext.getContext().getSession().put("errorlogin", "El nombre de usuario o la contraseña es incorrecta");
                 resultado = ERROR;
             }

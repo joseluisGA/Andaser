@@ -3,24 +3,26 @@ var mainApp = angular.module("mainApp", ['ngRoute'])
 
 	$routeProvider.
 	when('/inicio', {
-		templateUrl: '../views/galeria.jsp',
+		templateUrl: 'views/galeria.jsp',
 		controller: 'inicio'
 	}).
 
 	when('/accesoClientes', {
-		templateUrl: '../views/acceso.jsp',
+		templateUrl: 'views/acceso.jsp',
 		controller: 'acceso'
 	}).
                 
                 
          when('/AdminCat', {
-                templateUrl: '../views/adminCategoria.jsp',
+                templateUrl: 'views/adminCategoria.jsp',
                 controller: 'adminCat'
         }).       
                 
-	otherwise({
-		redirectTo: '/inicio'
-
-	});
+         when('/admin',{
+                templateUrl: 'views/admin.jsp',
+                controller: 'inicio'
+        });
+                
+	
 
 }]);

@@ -40,12 +40,17 @@
                             </div>
                             <button type="submit" class="btn btn-default">Enviar</button>
                         </form>
-                        <ul class="nav navbar-nav navbar-right" >
+                        <ul class="nav navbar-nav" >
                             <s:if test="#session.usuario==null">
-                                 <li><a href="#accesoClientes" style= "color:#08088e; font-weight: bold;">Acceso clientes</a></li>
+                                <s:url action="../Redireccion.action" var="urlRedirect">
+                                    <s:param name="template">login</s:param>
+                                </s:url>
+                                 <li style= "color:#08088e; font-weight: bold;"><s:a href="%{urlRedirect}">Acceso clientes</s:a></li>
                             </s:if>
                                      <s:else>
-                                     <li><p  style= "color:#08088e; font-weight: bold;">Bienvenido</p><s:property value="#session.usuario.nombre"/></li>
+                                     <li><div  style= "color:#08088e; font-weight: bold;">Bienvenido</div><s:property value="#session.usuario.nombre"/></li>
+                                     <s:url action="../LogOut.action" var="urlLogOut"/>
+                                     <li style= "color:#08088e; font-weight: bold;"><s:a href="%{urlLogOut}">Cerrar Sesión</s:a></li>
                                      </s:else>
                            
                             
