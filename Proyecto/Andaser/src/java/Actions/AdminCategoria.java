@@ -6,9 +6,9 @@
 package Actions;
 
 import Modelos.Categoria;
+import Modelos.Subcategoria;
 import com.opensymphony.xwork2.ActionSupport;
 
-import Modelos.CategoriaDao;
 import com.opensymphony.xwork2.ActionContext;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,32 +17,39 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
+import org.apache.struts2.ServletActionContext;
 /**
  *
  * @author minit
  */
 public class AdminCategoria extends ActionSupport{
-    private ArrayList array_Cat;
-    private List<Categoria> list_Cat;
+    private List<Categoria>array_Cat = new ArrayList();
+    private List<Categoria> list_Menu = new ArrayList() ;
+    private List<Subcategoria> aSubCat = new ArrayList();
     private String admin, vista, nombre;
     private int id;
-    private CategoriaDao cDao;
+    
     private String service;
-    public ArrayList getArray_Cat() {
+    public List getArray_Cat() {
         return array_Cat;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
     }
 
     public void setArray_Cat(ArrayList array_Cat) {
         this.array_Cat = array_Cat;
     }
 
-    public Collection<Categoria> getlist_Cat() {
-        return list_Cat;
-    }
 
-    public void setlist_Cat(List<Categoria> list_Cat) {
-        this.list_Cat = list_Cat;
-    }
+
+   
 
     public String getAdmin() {
         return admin;
@@ -76,37 +83,53 @@ public class AdminCategoria extends ActionSupport{
         this.id = id;
     }
 
-    public CategoriaDao getcDao() {
-        return cDao;
-    }
-
-    public void setcDao(CategoriaDao cDao) {
-        this.cDao = cDao;
-    }
-    
     
     
     @Override
     public String execute(){
+        
         try {
+              ServletContext context = ServletActionContext.getServletContext();
             String resultado = SUCCESS;
             Conexion co = new Conexion("andaser", "root", "root");
             
-            
+            if(service!=null){
             switch(service){
                 case "insertar":
-                    
-                    
-                    
+                    co.InsertarCategoria(this.nombre);
                     break;
+                case "modificar":
+                    co.ModificarCategoria(id, nombre);
+                    break;
+                case "borrar":
+                    co.BorrarCategoria(id);
+                    break;
+                   
             }
-            
+            }
             co.getAllCategoria();
-            while (co.Obtener_Siguiente()){
-                
-                array_Cat.add(new Categoria(co.Obtener_ID_Actual("ID"),co.Obtener_Actual("NOMBRE") ));
-                
-            }
+         while (co.Obtener_Siguiente()){  
+          
+              array_Cat.add(new Categoria(co.Obtener_ID_Actual("ID"),co.Obtener_Actual("NOMBRE") ));  
+             }
+         Iterator<Categoria> it = array_Cat.iterator();
+         Categoria aux;
+         ArrayList<Categoria> aAux = new ArrayList();
+         while(it.hasNext()){
+             aux = it.next();
+           co.getSubCategoria(aux.getId());
+                while(co.Obtener_Siguiente()){
+                  if(co.Obtener_Actual("ID")!=null){
+                      aSubCat.add(new Subcategoria(co.Obtener_ID_Actual("ID"),aux.getId(), co.Obtener_Actual("NOMBRE")));
+                     aux.setSubcategoria((ArrayList<Subcategoria>) aSubCat);  
+                  }  
+                }
+               
+               aAux.add(aux);
+         }
+         array_Cat = aAux;
+         context.setAttribute(("vista"), "views/adminCategoria.jsp");
+           context.setAttribute("aCat", array_Cat);
             return resultado;
         } catch (InstantiationException ex) {
             Logger.getLogger(AdminCategoria.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +141,8 @@ public class AdminCategoria extends ActionSupport{
             Logger.getLogger(AdminCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ActionContext.getContext().getSession().put("vista","../views/adminCategoria.jsp");
+      
+        
         return SUCCESS;
     }
     

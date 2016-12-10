@@ -12,6 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -28,7 +29,7 @@ public class Inicio extends ActionSupport{
    private ServletContext context;
 
  private ArrayList<Categoria> aCat= new ArrayList();
- ArrayList<Subcategoria> aSubCat = new ArrayList();
+ private List<Subcategoria> aSubCat = new ArrayList();
  private Categoria cat;
  private Subcategoria subCat;
 
@@ -40,7 +41,7 @@ public class Inicio extends ActionSupport{
         this.aCat = aCat;
     }
 
-    public ArrayList<Subcategoria> getaSubCat() {
+    public List<Subcategoria> getaSubCat() {
         return aSubCat;
     }
 
@@ -86,7 +87,7 @@ public class Inicio extends ActionSupport{
                 while(co.Obtener_Siguiente()){
                   if(co.Obtener_Actual("ID")!=null){
                       aSubCat.add(new Subcategoria(co.Obtener_ID_Actual("ID"),aux.getId(), co.Obtener_Actual("NOMBRE")));
-                     aux.setSubcategoria(aSubCat);  
+                     aux.setSubcategoria((ArrayList<Subcategoria>) aSubCat);  
                   }  
                 }
                

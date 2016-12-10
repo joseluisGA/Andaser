@@ -23,11 +23,11 @@ public class Producto {
     private int id_subcategoria;
     private int precio1;
     private int precio2;
-    private int precio3;
+   
     private String ficha;
     private String imagen;
 
-    public Producto(String REF, String nombre, String descripcion, int id_categoria, int id_subcategoria, int precio1, int precio2, int precio3, String ficha, String imagen) {
+    public Producto(String REF, String nombre, String descripcion, int id_categoria, int id_subcategoria, int precio1, int precio2,  String ficha, String imagen) {
         this.REF = REF;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -35,7 +35,7 @@ public class Producto {
         this.id_subcategoria = id_subcategoria;
         this.precio1 = precio1;
         this.precio2 = precio2;
-        this.precio3 = precio3;
+       
         this.ficha = ficha;
         this.imagen = imagen;
     }
@@ -98,13 +98,7 @@ public class Producto {
         this.precio2 = precio2;
     }
 
-    public int getPrecio3() {
-        return precio3;
-    }
-
-    public void setPrecio3(int precio3) {
-        this.precio3 = precio3;
-    }
+    
 
     public String getFicha() {
         return ficha;

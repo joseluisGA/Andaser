@@ -15,14 +15,15 @@ import org.apache.struts2.ServletActionContext;
  */
 public class Redirect extends ActionSupport{
     private String template;
-    private int tipo;
-
-    public int getTipo() {
-        return tipo;
+    private String rol;
+   
+    
+    public String getRol() {
+        return rol;
     }
 
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
     
     public String getTemplate() {
@@ -42,6 +43,7 @@ public class Redirect extends ActionSupport{
             break;
             
             case "registro":
+                context.setAttribute(("rol"), rol);
                 context.setAttribute(("vista"), "views/registro.jsp");
                 break;
     }

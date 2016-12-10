@@ -12,7 +12,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand menu" href="#">Andaser</a>
+                        <div class="navbar-brand menu"><s:a  href="inicio.action">Andaser</s:a></div>
                     </div>
                     <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">

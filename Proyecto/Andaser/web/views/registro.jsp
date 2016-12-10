@@ -2,13 +2,15 @@
 <%@taglib uri="/struts-tags" prefix="s" %>
 <div ng-controller="registro">
     <div class="col-md-6 col-md-offset-3">
-         
+        
+        <s:property value="#application.rol" />
                     <div class="panel panel-default">
-                        <s:if test="tipo==2">
+                        <s:if test="#application.rol==2">
                         <div class="panel-heading">Registro de particular</div>
                         <div class="panel-body" >
                            
                             <s:form action="registro">
+                                <s:hidden name="rol" value="2"/>
                                  <div class="form-group" >
                                     <s:textfield name="usuario" label="Nombre de usuario" ng-model="user.usuario" placeholder="usuario" cssClass="form-control"/>
                                 </div>
@@ -22,10 +24,10 @@
                                     <s:textfield name="nombre" label="Nombre" ng-model="particular.nombre" placeholder="Nombre" cssClass="form-control"/>
                                 </div>
                                  <div class="form-group" >
-                                    <s:textfield name="apellido1" label="Primer apellido" ng-model="particular.ape1" placeholder="Primer apellido" cssClass="form-control"/>
+                                    <s:textfield name="ape1" label="Primer apellido" ng-model="particular.ape1" placeholder="Primer apellido" cssClass="form-control"/>
                                 </div>
                                  <div class="form-group" >
-                                    <s:textfield name="apellido2" label="Segundo apellido" ng-model="particular.ape2" placeholder="Segundo apellido" cssClass="form-control"/>
+                                    <s:textfield name="ape2" label="Segundo apellido" ng-model="particular.ape2" placeholder="Segundo apellido" cssClass="form-control"/>
                                 </div>
                                 <div class="form-group" >
                                     <s:textfield name="calle" label="Calle" ng-model="direccion.calle" placeholder="Calle" cssClass="form-control"/>
@@ -34,7 +36,7 @@
                                     <s:textfield name="poblacion" label="Población" ng-model="direccion.pobla" placeholder="Población" cssClass="form-control"/>
                                 </div>
                                 <div class="form-group" >
-                                    <s:textfield name="CP" label="Código postal" ng-model="particular.cp" placeholder="Código postal" cssClass="form-control"/>
+                                    <s:textfield name="cp" label="Código postal" ng-model="particular.cp" placeholder="Código postal" cssClass="form-control"/>
                                 </div>
                                 <div class="form-group" >
                                     <s:textfield name="provincia" label="Provincia" ng-model="particular.prov" placeholder="Provincia" cssClass="form-control"/>
@@ -55,11 +57,12 @@
                            
                         </div>
                          </s:if> 
-                        <s:else>
+                        <s:if test="#application.rol==3}">
                              <div class="panel-heading">Registro de empresa</div>
                         <div class="panel-body" >
                            
                             <s:form action="registro">
+                                  <s:hidden name="rol" value="3"/>
                                  <div class="form-group" >
                                     <s:textfield name="usuario" label="Nombre de usuario" ng-model="user.usuario" placeholder="usuario" cssClass="form-control"/>
                                 </div>
@@ -70,7 +73,7 @@
                                     <s:textfield name="nif" label="NIF" ng-model="empresa.nif" placeholder="NIF" cssClass="form-control"/>
                                 </div>
                                  <div class="form-group" >
-                                    <s:textfield name="nombre" label="Nombre" ng-model="empresa.nombre" placeholder="Nombre" cssClass="form-control"/>
+                                    <s:textfield name="nombre" label="Nombre de la empresa" ng-model="empresa.nombre" placeholder="Nombre de la empresa" cssClass="form-control"/>
                                 </div>
                                 
                                 <div class="form-group" >
@@ -100,7 +103,7 @@
                             </s:form>
                            
                         </div>
-                        </s:else>
+                        </s:if>
                     </div>
    
     

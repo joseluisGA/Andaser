@@ -15,6 +15,15 @@ import java.sql.SQLException;
 import java.util.Random;
 import javax.servlet.ServletContext;
 import org.apache.struts2.ServletActionContext;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -23,13 +32,25 @@ import org.apache.struts2.ServletActionContext;
 public class Registro extends ActionSupport {
 
     private String usuario, email, dni, nombre, ape1, ape2, nif, calle, poblacion, provincia, pais;
-    private int cp, tlfn1, tlfn2, rol;
+    private int cp, tlfn1, tlfn2, rol, idDir;
     private Usuario user;
     private Direccion dir;
     private Cliente cli;
     private Empresa em;
     private String pass;
 
+    
+    static Properties properties = new Properties();
+   static
+   {
+      properties.put("mail.smtp.host", "smtp.gmail.com");
+      properties.put("mail.smtp.socketFactory.port", "465");
+      properties.put("mail.smtp.socketFactory.class",
+                     "javax.net.ssl.SSLSocketFactory");
+      properties.put("mail.smtp.auth", "true");
+      properties.put("mail.smtp.port", "465");
+   }
+   
     public String getUsuario() {
         return usuario;
     }
@@ -157,6 +178,35 @@ public class Registro extends ActionSupport {
     public static void setLOG(Logger LOG) {
         ActionSupport.LOG = LOG;
     }
+    
+    private void EnviarCorreo(String to ) throws AddressException, MessagingException{
+        Session session = Session.getDefaultInstance(properties,  
+            new javax.mail.Authenticator() {
+            protected PasswordAuthentication 
+            getPasswordAuthentication() {
+            return new 
+            PasswordAuthentication("minitrampi@gmail.com", "minitrampi94");
+            }});
+
+         Message message = new MimeMessage(session);
+         message.setFrom(new InternetAddress("minitrampi@gmail.com"));
+         message.setRecipients(Message.RecipientType.TO, 
+            InternetAddress.parse(to));
+         message.setSubject("Solicitud de registro");
+         message.setText("Gracias por su solicitud de registro en www.comercialandaser.es."
+                 + "/n "
+                 + "Su usuario es: "+this.usuario
+                 + "/n"
+                 + "Su contraseña es: "+this.pass+" /n "
+                 + "En su próximo inicio de sesión podrá cambiarla."
+                         + "/n"
+                         + "/n"
+                         + "/n"
+                         + "/n"
+                         + "/n"
+                 + "Si ha recibido este correo por error, por favor conteste a este mismo mensaje y notifíquelo. Muchas gracias.");
+         Transport.send(message);
+    }
 
     private String generarPass() {
         String pass = "";
@@ -176,7 +226,7 @@ public class Registro extends ActionSupport {
     }
 
     @Override
-    public String execute() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalAccessException, IllegalAccessException, SQLException {
+    public String execute() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalAccessException, IllegalAccessException, SQLException, MessagingException {
         Conexion co = new Conexion("andaser", "root", "root");
         ServletContext context = ServletActionContext.getServletContext();
         co.existeUsuario(this.usuario);
@@ -195,12 +245,41 @@ public class Registro extends ActionSupport {
                     case 2:
                         co.existeCliente(dni);
                         if(!co.Obtener_Siguiente()){
-                            
+                        user.setRol(this.rol);
                         cli = new Cliente(dni, nombre, ape1, ape2);
                         cli.setUser(user);
                         cli.setDir(dir);
+                        co.insertarDireccion(dir);
+                        co.getIdDireccion(dir);
+                        if(co.Obtener_Siguiente()){
+                            this.idDir = co.Obtener_ID_Actual("ID");
+                        }
+                        co.insertarUsuario(user);
+                        
+                        co.insertarCliente(cli, idDir);
+                        this.EnviarCorreo(this.email);
                         
                         }
+                        break;
+                    
+                    case 3:
+                        co.existeEmpresa(nif);
+                        if(!co.Obtener_Siguiente()){
+                            em = new Empresa(nif, nombre);
+                            em.setUser(user);
+                            em.setDir(dir);
+                            co.insertarDireccion(dir);
+                            co.getIdDireccion(dir);
+                            if(co.Obtener_Siguiente()){
+                                this.idDir = co.Obtener_ID_Actual("ID");
+                            }
+                            user.setRol(this.idDir);
+                            co.insertarUsuario(user);
+                            
+                            co.insertarEmpresa(em, idDir);
+                            this.EnviarCorreo(this.email);
+                        }
+                        
                         break;
                 }
             }

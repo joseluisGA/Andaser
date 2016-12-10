@@ -4,16 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Modelos/Usuario.java</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/index.jsp</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/Menu.jsp</file>
             <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/struts.xml</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Modelos/Direccion.java</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/registro.jsp</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Modelos/Cliente.java</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/menuAdmin.jsp</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/adminProducto.jsp</file>
             <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/Conexion.java</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/Registro.java</file>
             <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/acceso.jsp</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/Login.java</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/adminUsuario.jsp</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/AdminProducto.java</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/AdminUsuario.java</file>
         </group>
     </open-files>
 </project-private>

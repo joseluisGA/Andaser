@@ -11,9 +11,23 @@
    <result-type name="dispatcher" default="true"
                 class="org.apache.struts2.dispatcher.ServletDispatcherResult" />
 </result-types>
-        <action name="adminCategoria" class="Actions.AdminCategoria">
+        <action name="AdminCategoria" class="Actions.AdminCategoria">
             <result type="dispatcher">/index.jsp</result>
         </action>
+        <action name="AdminSubCategoria" class="Actions.AdminSubCategoria">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="AdminProducto" class="Actions.AdminProducto">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="AdminUsuario" class="Actions.AdminUsuario">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="AdminPedido" class="Actions.AdminPedido">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        
+        
         <action name="inicio" class="Actions.Inicio">
             <result type="dispatcher">/index.jsp</result>
         </action>
@@ -24,7 +38,7 @@
             <result type="dispatcher">/index.jsp</result>
         </action>
         <action name="Redireccion" class="Actions.Redirect">
-            <result type="dispatcher">/index.jsp</result>
+            <result name="success" type="dispatcher">/index.jsp</result>
         </action>
         <action name="registro" class="Actions.Registro">
             <result type="dispatcher">/index.jsp</result>
