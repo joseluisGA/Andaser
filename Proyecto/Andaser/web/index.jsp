@@ -37,22 +37,23 @@
             <div ng-include="'views/menuAdmin.jsp'"></div>
         </s:if>
       
-        <!----------------- Galería ------------------------>
-        <div class="container" style="padding:2%">
+        <!----------------- Vista dinámica ------------------------>
+        <div class="container">
             <div class="row">
                
-                   <div ng-include="'<s:property value="#session.vista"/>'"></div>
+                <div ng-include="'<s:property value="#session.vista"/>'" />
                 <!--<div ng-view></div>-->
                    
             </div>
         </div>
-    
+                
+                <br/>
 
        
        
             
         <!----------------Footer------------------->
-        <div ng-include="'views/footer.jsp'"></div>
+        <div ng-include="'views/footer.jsp'" style="margin-top: 20px;"></div>
    
 
  

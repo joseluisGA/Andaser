@@ -10,8 +10,9 @@
     </filter-mapping>
     <session-config>
         <session-timeout>
-            7200
+            0
         </session-timeout>
+        
     </session-config>
     <welcome-file-list>
         <welcome-file>/welcomePage.jsp</welcome-file>

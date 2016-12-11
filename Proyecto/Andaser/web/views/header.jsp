@@ -1,7 +1,18 @@
-<%-- 
-    Document   : header
-    Created on : 08-nov-2016, 22:26:39
-    Author     : minit
---%>
-
-  
+<div class="container ">
+    <div class="col-md-12 header">
+        <div class="col-md-6">
+            <img src="img/logo.jpg" alt=""/>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-4 ">
+                <img src="img/masquelack.jpg" class="distribuidores" alt=""/>
+            </div>
+            <div class="col-md-4 distribuidores">
+                <img src="img/adinor.jpg" class="distribuidores" alt=""/>
+            </div>
+            <div class="col-md-4 distribuidores">
+                <img src="img/sia.png"  class="distribuidores" alt=""/>
+            </div>
+        </div>
+    </div>
+</div>

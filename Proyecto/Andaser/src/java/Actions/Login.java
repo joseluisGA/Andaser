@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Actions;
+
 import com.opensymphony.xwork2.ActionContext;
 
 import Modelos.Usuario;
@@ -12,17 +13,16 @@ import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import org.apache.struts2.ServletActionContext;
 
-
 /**
  *
  * @author minit
  */
+public class Login extends ActionSupport {
 
-public class Login extends ActionSupport{
-  
     private String user;
     private String password;
     private Usuario usuario;
+
     public String getUser() {
         return user;
     }
@@ -39,46 +39,34 @@ public class Login extends ActionSupport{
         this.password = password;
     }
 
-    
-    
     @Override
-    public String execute() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException{
+    public String execute() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
         Conexion co = new Conexion("andaser", "root", "root");
         String resultado = SUCCESS;
         ServletContext context = ServletActionContext.getServletContext();
-        
-       
+
         co.Login(user, password);
-        if(co.Obtener_Siguiente()){
+        if (co.Obtener_Siguiente()) {
             co.getUser(user);
-            if(co.Obtener_Siguiente()){
+            if (co.Obtener_Siguiente()) {
                 usuario = new Usuario(co.Obtener_Actual("NOMBRE"), co.Obtener_Actual("PASSWORD"), co.Obtener_Actual("EMAIL"), co.Obtener_ID_Actual("ROL"));
                 ActionContext.getContext().getSession().put("usuario", this.usuario);
                 ActionContext.getContext().getSession().put("errorlogin", null);
-                if(co.Obtener_ID_Actual("CONTRASENYACAMBIADA")==0){
+                if (co.Obtener_ID_Actual("CONTRASENYACAMBIADA") == 0) {
                     ActionContext.getContext().getSession().put("PassCambiada", 0);
-                     ActionContext.getContext().getSession().put("vista", "views/cambiarPass.jsp");
-                   
+                    ActionContext.getContext().getSession().put("vista", "views/cambiarPass.jsp");
+
+                } else {
+                    ActionContext.getContext().getSession().put("vista", "views/galeria.jsp");
                 }
-                else{
-                        if(!user.equals("admin")){
-                         ActionContext.getContext().getSession().put("vista", "views/galeria.jsp");
-                    }
-                    else{
-                         ActionContext.getContext().getSession().put("vista", "views/galeria.jsp");
-                    }
-                }
-            }
-            else{
-                 ActionContext.getContext().getSession().put("vista", "views/acceso.jsp");
+            } else {
+                ActionContext.getContext().getSession().put("vista", "views/acceso.jsp");
                 ActionContext.getContext().getSession().put("errorlogin", "El nombre de usuario o la contraseña es incorrecta");
                 resultado = ERROR;
             }
         }
-        
-        
-        
+
         return resultado;
     }
-    
+
 }

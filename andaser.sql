@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2016 a las 09:33:22
+-- Tiempo de generación: 11-12-2016 a las 23:19:51
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -19,6 +19,19 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `andaser`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `albaran`
+--
+
+CREATE TABLE `albaran` (
+  `ID` int(11) NOT NULL,
+  `ID_PEDIDO` int(11) NOT NULL,
+  `RUTA` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `FECHA` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -49,9 +62,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`ID`, `NOMBRE`) VALUES
-(1, 'Barniz'),
-(2, 'Herrajes'),
-(3, 'Abrasivos');
+(3, 'Abrasivos'),
+(1, 'Barnices'),
+(2, 'Herrajes');
 
 -- --------------------------------------------------------
 
@@ -60,17 +73,20 @@ INSERT INTO `categoria` (`ID`, `NOMBRE`) VALUES
 --
 
 CREATE TABLE `cliente` (
-  `DNI` varchar(9) COLLATE utf8_spanish_ci NOT NULL,
+  `DNI` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `usuario` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `apellido1` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `apellido2` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `poblacion` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `codigo_postal` int(5) NOT NULL,
-  `provincia` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `pais` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+  `ID_DIRECCION` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`DNI`, `usuario`, `nombre`, `apellido1`, `apellido2`, `ID_DIRECCION`) VALUES
+('sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdf', 8);
 
 -- --------------------------------------------------------
 
@@ -84,8 +100,90 @@ CREATE TABLE `direccion` (
   `POBLACION` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `CODIGO_POSTAL` int(5) NOT NULL,
   `PROVINCIA` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `PAIS` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+  `PAIS` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `TLFN1` int(9) NOT NULL,
+  `TLFN2` int(9) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `direccion`
+--
+
+INSERT INTO `direccion` (`ID`, `CALLE`, `POBLACION`, `CODIGO_POSTAL`, `PROVINCIA`, `PAIS`, `TLFN1`, `TLFN2`) VALUES
+(1, 'tutyuy', 'tutyu', 4645, 'tyrrt', '4ytryrtytry', 456456, 474),
+(2, 'tutyuy', 'tutyu', 4645, 'tyrrt', '4ytryrtytry', 456456, 474),
+(3, 'jghjghj', 'ghjhgj', 4564, 'ghhfg', 'fghgfh', 4563, 346364),
+(4, 'jghjghj', 'ghjhgj', 4564, 'ghhfg', 'fghgfh', 4563, 346364),
+(5, 'werwer', 'werwree', 24, 'erwewrwer', 'werwer', 234234, 234234),
+(6, 'gbgb', 'gbgbg', 4335, 'fgfdgfgfd', 'fgfg', 345345, 345345),
+(7, 'fdgdfgdf', 'gdfgdfg', 34534534, 'gfdgdf', 'dfgdfgd', 252325, 23425),
+(8, 'sdfsdf', 'sdfsdf', 123123, 'sdfsdf', 'fsdfsd', 234234, 234234);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `NIF` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `NOMBRE_EMPRESA` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `USUARIO` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_DIRECCION` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`NIF`, `NOMBRE_EMPRESA`, `USUARIO`, `ID_DIRECCION`) VALUES
+('45565454', 'Joservid', 'Joservid', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lista_pedidos`
+--
+
+CREATE TABLE `lista_pedidos` (
+  `ID` int(11) NOT NULL,
+  `USUARIO` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `DNI_NIF` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_DIR` int(11) NOT NULL,
+  `FECHA` date NOT NULL,
+  `PRECIO_TOTAL` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `lista_pedidos`
+--
+
+INSERT INTO `lista_pedidos` (`ID`, `USUARIO`, `DNI_NIF`, `ID_DIR`, `FECHA`, `PRECIO_TOTAL`) VALUES
+(14, 'Joservid', '45565454', 4, '2016-12-11', 128726);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedido`
+--
+
+CREATE TABLE `pedido` (
+  `ID` int(11) NOT NULL,
+  `ID_LISTA_PED` int(11) NOT NULL,
+  `REF` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `PRECIO` int(11) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`ID`, `ID_LISTA_PED`, `REF`, `PRECIO`, `CANTIDAD`) VALUES
+(6, 14, '455dfs', 64363, 1),
+(7, 14, '455dfs', 64363, 1),
+(8, 14, '455dfs', 64363, 1),
+(9, 14, '455dfs', 64363, 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +199,6 @@ CREATE TABLE `producto` (
   `ID_SUBCATEGORIA` int(11) DEFAULT NULL,
   `PRECIO1` int(11) NOT NULL,
   `PRECIO2` int(11) NOT NULL,
-  `PRECIO3` int(11) NOT NULL,
   `FICHA` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
   `IMAGEN` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -110,8 +207,9 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`REF`, `NOMBRE`, `DESCRIPCION`, `ID_CATEGORIA`, `ID_SUBCATEGORIA`, `PRECIO1`, `PRECIO2`, `PRECIO3`, `FICHA`, `IMAGEN`) VALUES
-('455dfs', 'Laca blanca', 'dfsdfsdfsd', 1, 1, 32423, 64363, 23424, NULL, NULL);
+INSERT INTO `producto` (`REF`, `NOMBRE`, `DESCRIPCION`, `ID_CATEGORIA`, `ID_SUBCATEGORIA`, `PRECIO1`, `PRECIO2`, `FICHA`, `IMAGEN`) VALUES
+('455dfs', 'Laca blanca', 'gghgjkjjhgdfsdaddghj', 3, 1, 32423, 64363, '', 'IMG_2966_Masquelack_443-25.png'),
+('ertert', 'erter', 'ertert', 1, 1, 345345, 345345, 'sia.png', 'masquelack.jpg');
 
 -- --------------------------------------------------------
 
@@ -131,8 +229,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES
 (1, 'admin'),
 (2, 'particular'),
-(3, 'carpintero'),
-(4, 'mayorista');
+(3, 'empressa');
 
 -- --------------------------------------------------------
 
@@ -151,8 +248,7 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`ID`, `ID_CATEGORIA`, `NOMBRE`) VALUES
-(1, 1, 'Laca'),
-(2, 1, 'Tintes');
+(1, 1, 'Laca');
 
 -- --------------------------------------------------------
 
@@ -164,20 +260,30 @@ CREATE TABLE `usuario` (
   `NOMBRE` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `PASSWORD` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `EMAIL` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `ROL` int(11) NOT NULL
+  `ROL` int(11) NOT NULL,
+  `UsuarioConfirmado` tinyint(1) NOT NULL DEFAULT '0',
+  `ContrasenyaCambiada` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`NOMBRE`, `PASSWORD`, `EMAIL`, `ROL`) VALUES
-('admin', 'admin', 'ComercialAndaser@gmail.com', 1),
-('Joservid', 'joservid', 'joservid@live.com', 3);
+INSERT INTO `usuario` (`NOMBRE`, `PASSWORD`, `EMAIL`, `ROL`, `UsuarioConfirmado`, `ContrasenyaCambiada`) VALUES
+('admin', 'admin', 'ComercialAndaser@gmail.com', 1, 1, 1),
+('Joservid', 'joservid', 'joservid@live.com', 3, 1, 1),
+('sdfsdf', '4SJHGNO7R0J8', 'sfdsdf', 2, 0, 0);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `albaran`
+--
+ALTER TABLE `albaran`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID_PEDIDO` (`ID_PEDIDO`);
 
 --
 -- Indices de la tabla `caracteristica`
@@ -191,20 +297,49 @@ ALTER TABLE `caracteristica`
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NOMBRE` (`NOMBRE`);
 
 --
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`DNI`),
-  ADD KEY `id_usuario` (`usuario`);
+  ADD KEY `id_usuario` (`usuario`),
+  ADD KEY `idDireccion` (`ID_DIRECCION`);
 
 --
 -- Indices de la tabla `direccion`
 --
 ALTER TABLE `direccion`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`NIF`),
+  ADD UNIQUE KEY `NOMBRE_EMPRESA` (`NOMBRE_EMPRESA`),
+  ADD KEY `USUARIO` (`USUARIO`),
+  ADD KEY `ID_DIRECCION` (`ID_DIRECCION`);
+
+--
+-- Indices de la tabla `lista_pedidos`
+--
+ALTER TABLE `lista_pedidos`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `USUARIO` (`USUARIO`),
+  ADD KEY `DNI_NIE` (`DNI_NIF`),
+  ADD KEY `USUARIO_2` (`USUARIO`),
+  ADD KEY `ID_DIR` (`ID_DIR`);
+
+--
+-- Indices de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `REF` (`REF`),
+  ADD KEY `ID_LISTA_PED` (`ID_LISTA_PED`);
 
 --
 -- Indices de la tabla `producto`
@@ -241,6 +376,11 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `albaran`
+--
+ALTER TABLE `albaran`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `caracteristica`
 --
 ALTER TABLE `caracteristica`
@@ -254,12 +394,22 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `lista_pedidos`
+--
+ALTER TABLE `lista_pedidos`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
@@ -268,6 +418,12 @@ ALTER TABLE `subcategoria`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `albaran`
+--
+ALTER TABLE `albaran`
+  ADD CONSTRAINT `albaran_ibfk_1` FOREIGN KEY (`ID_PEDIDO`) REFERENCES `pedido` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `caracteristica`
@@ -279,7 +435,29 @@ ALTER TABLE `caracteristica`
 -- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`NOMBRE`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`NOMBRE`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`ID_DIRECCION`) REFERENCES `direccion` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD CONSTRAINT `empresa_ibfk_2` FOREIGN KEY (`ID_DIRECCION`) REFERENCES `direccion` (`ID`),
+  ADD CONSTRAINT `empresa_ibfk_3` FOREIGN KEY (`USUARIO`) REFERENCES `usuario` (`NOMBRE`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `lista_pedidos`
+--
+ALTER TABLE `lista_pedidos`
+  ADD CONSTRAINT `lista_pedidos_ibfk_2` FOREIGN KEY (`USUARIO`) REFERENCES `usuario` (`NOMBRE`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `lista_pedidos_ibfk_3` FOREIGN KEY (`ID_DIR`) REFERENCES `direccion` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`REF`) REFERENCES `producto` (`REF`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`ID_LISTA_PED`) REFERENCES `lista_pedidos` (`ID`);
 
 --
 -- Filtros para la tabla `producto`

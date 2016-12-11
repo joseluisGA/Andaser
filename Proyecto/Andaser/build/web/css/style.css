@@ -1,13 +1,27 @@
+.header{
+     width: 90%;
+   
+}
 .distribuidores{
     width:75%;
     height: 75%;
     margin-top: 10px;
+    max-height: 200px;
+    max-width: 150px;
 }
 .menu{
     background-color: #d9dbda;
     width: 90%;
     margin-left: 3.7%;
    
+}
+.contenido{
+     background-color: #d9dbda;
+     border-radius: 3px;
+     padding: 10px;
+}
+.label{
+    color:black;
 }
 .navbar-default .navbar-brand{
      color: #08088e;
@@ -42,22 +56,17 @@ footer{
     margin-bottom: 5%;
     margin-top: 5%; 
    
-    width: 500px; 
-    height: 300px; 
+   
     
-    font-size: 30px;
+    font-size: 16px;
 }
-.añadir{
-    padding-left: 20%; 
-    background-color: black;
-    color: #C80B21;
-    
-    
+.producto img{
+    width: 80%;
+    height: 80%;
 }
-.producto.añadir{
-    padding-left: 20%; 
-    
-    color: #C80B21;
-    
-    
+
+.carro{
+    width: 100px;
+    height: 50px;
+   
 }

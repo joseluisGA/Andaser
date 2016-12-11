@@ -18,20 +18,20 @@
                     <ul class="nav navbar-nav">
                     <s:iterator value="#application.aCat">
                         <s:url action="../Redireccion" var="urlRedirectProCat" escapeAmp="false">
-                             <s:param name="template">ProductoCat</s:param>
+                            <s:param name="template">ProductoCat</s:param>
                             <s:param name="idCat"><s:property value="id"/></s:param>
                         </s:url>
                         <s:if test="%{subcategoria!=null}">
-                          
+
                             <li class="dropdown">
                                 <a href="<s:property value='%{urlRedirectProCat}'/>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><s:property value="nombre"/> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <s:iterator value="subcategoria">
-                                          <s:url action="../Redireccion" var="urlRedirectProSubCat" escapeAmp="false">
-                                <s:param name="template">ProductoSubCat</s:param>
-                                <s:param name="idSubCat"><s:property value="id_subCat"/></s:param>
-                                
-                            </s:url>
+                                        <s:url action="../Redireccion" var="urlRedirectProSubCat" escapeAmp="false">
+                                            <s:param name="template">ProductoSubCat</s:param>
+                                            <s:param name="idSubCat"><s:property value="id_subCat"/></s:param>
+
+                                        </s:url>
                                         <li><a href="<s:property value='%{urlRedirectProSubCat}'/>"><s:property value="nombreSubCat"/></a></li>
                                         </s:iterator>
                                 </ul>
@@ -43,13 +43,26 @@
                         </s:iterator>
 
                 </ul>
-                <s:form action="Redirect" cssClass="navbar-form navbar-left form-horizontal"  theme="simple">
+                <s:form action="Redireccion" cssClass="navbar-form navbar-left form-horizontal"  theme="simple">
                     <div class="form-group">
                         <input type="text" name="busqueda"  class="form-control" placeholder="Buscar..." />
                         <s:submit name="template" value="Buscar" cssClass="btn btn-default"/>
                     </div>
 
                 </s:form>
+                <s:url action="../AdminPedido.action" var="urlMostrarPed">
+                    <s:param name="service">mostrar</s:param>
+
+                </s:url>
+                <div class="navbar-left" ><s:a href="%{urlMostrarPed}"><img src="img/carro.png" alt="" class="carro"/>
+                        <s:if test="#session.pedido==null">
+                            0
+                        </s:if>
+                        <s:else>
+                            <s:property value="#session.pedido.array_ped.size()"/>
+                        </s:else>
+                    </s:a>
+                </div>
                 <ul class="nav navbar-nav" >
                     <s:if test="#session.usuario==null">
                         <s:url action="../Redireccion.action" var="urlRedirect">

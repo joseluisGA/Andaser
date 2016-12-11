@@ -185,7 +185,7 @@ public class Registro extends ActionSupport {
             protected PasswordAuthentication 
             getPasswordAuthentication() {
             return new 
-            PasswordAuthentication("minitrampi@gmail.com", "minitrampi94");
+            PasswordAuthentication("minitrampi@gmail.com", "");
             }});
 
          Message message = new MimeMessage(session);
@@ -277,7 +277,7 @@ public class Registro extends ActionSupport {
                             co.insertarUsuario(user);
                             
                             co.insertarEmpresa(em, idDir);
-                            this.EnviarCorreo(this.email);
+                            //this.EnviarCorreo(this.email);
                         }
                         
                         break;

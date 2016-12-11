@@ -156,7 +156,7 @@ public class AdminProducto extends ActionSupport{
                     if(co.Obtener_Siguiente()){
                         pro = new Producto(co.Obtener_Actual("REF"), co.Obtener_Actual("NOMBRE"), co.Obtener_Actual("DESCRIPCION"),co.Obtener_ID_Actual("ID_CATEGORIA"), co.Obtener_ID_Actual("ID_SUBCATEGORIA"), co.Obtener_ID_Actual("PRECIO1"), co.Obtener_ID_Actual("PRECIO2"), co.Obtener_Actual("FICHA"), co.Obtener_Actual("IMAGEN"));
                     }
-                    context.setAttribute(("pro"), pro);
+                    ActionContext.getContext().getSession().put(("pro"), pro);
                     ActionContext.getContext().getSession().put(("vista"), "views/modProducto.jsp");
                     }
                     else{
@@ -198,14 +198,14 @@ public class AdminProducto extends ActionSupport{
          array_c = aAux;
          
            context.setAttribute("aCat", array_c);
-            context.setAttribute("aSubCat", array_s);
+            ActionContext.getContext().getSession().put("aSubCat", array_s);
          co.GetAllProducto();
          while(co.Obtener_Siguiente()){
              array_p.add(new Producto(co.Obtener_Actual("REF"), co.Obtener_Actual("NOMBRE"),
                      co.Obtener_Actual("DESCRIPCION"), co.Obtener_ID_Actual("ID_CATEGORIA"),
                      co.Obtener_ID_Actual("ID_SUBCATEGORIA"),co.Obtener_ID_Actual("PRECIO1"), co.Obtener_ID_Actual("PRECIO2"), co.Obtener_Actual("FICHA"), co.Obtener_Actual("IMAGEN")));
          }
-        context.setAttribute("aPro", array_p);
+        ActionContext.getContext().getSession().put("aPro", array_p);
         
         return SUCCESS;
     }

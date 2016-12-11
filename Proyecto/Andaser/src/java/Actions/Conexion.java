@@ -5,7 +5,7 @@ import Modelos.Direccion;
 import Modelos.Empresa;
 import Modelos.Usuario;
 import java.sql.*;
-
+import java.util.Date;
 public class Conexion {
 
     //********************* Atributos *************************
@@ -14,6 +14,7 @@ public class Conexion {
     private java.sql.Statement Sentencia_SQL;
     //Atributo que nos permite ejecutar una sentencia SQL
     private java.sql.ResultSet Conj_Registros;
+    private java.sql.ResultSet aux_Conj_Registros;
     //(Cursor) En él están almacenados los datos.
     private String bbdd;
     private String usuario;
@@ -150,11 +151,13 @@ public class Conexion {
         valor = Conj_Registros.getInt(Campo);
         return valor;
     }
+ 
 
     //------------------------------------------------------
     public boolean Obtener_Siguiente() throws SQLException {
         return Conj_Registros.next();
     }
+    
 
     //------------------------------------------------------
     public boolean Obtener_Anterior() throws SQLException {
@@ -452,9 +455,67 @@ public class Conexion {
     
     public void getBusqueda(String parametro) throws SQLException{
         String sentencia = "SELECT REF, NOMBRE, DESCRIPCION,ID_CATEGORIA, ID_SUBCATEGORIA, PRECIO1, PRECIO2, FICHA, IMAGEN FROM PRODUCTO"
-                + " WHERE UPPER(REF)  LIKE UPPER(%'"+parametro+"'%) "
-                + "OR UPPER(NOMBRE) LIKE UPPER(%'"+parametro+"'%) "
-                + "OR UPPER (DESCRIPCION) LIKE UPPER(%'"+parametro+"'%)";
+                + " WHERE UPPER(REF)  LIKE UPPER('%"+parametro+"%') "
+                + "OR UPPER(NOMBRE) LIKE UPPER('%"+parametro+"%') "
+                + "OR UPPER (DESCRIPCION) LIKE UPPER('%"+parametro+"%')";
         Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
     }
+    
+    //-----------------------------------------Pedido---------------------//
+    public void AgregarListaPedido ( String usuario, String DOC, int idDir, String fecha, int precio_total) throws SQLException{
+       
+        String sentencia = "INSERT INTO LISTA_PEDIDOS VALUES(NULL, "
+                                                            + " '"+usuario+
+                                                            "', '"+DOC+
+                                                            "', "+idDir+
+                                                            ", '"+fecha+
+                                                            "' ,"+precio_total+")";
+        
+        Sentencia_SQL.executeUpdate(sentencia);
+        
+       
+    }
+        public void AgregarPedido (String REF, String usuario, String DOC, int idDir,int precio,int cantidad, String fecha, int precio_total) throws SQLException{
+       
+       String sentencia = "SELECT ID FROM LISTA_PEDIDOS WHERE USUARIO ='"+usuario+"'"
+                                                + " AND DNI_NIF = '"+DOC+" '"
+                                                + " AND ID_DIR = "+idDir+
+                                                  " AND FECHA = '"+fecha+" '"
+                                                + " AND PRECIO_TOTAL = "+precio_total;
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+        
+        if(Obtener_Siguiente()){
+            sentencia = "INSERT INTO PEDIDO VALUES (NULL,"+Obtener_Actual("ID")+" ,'"+REF+"'"
+                                                        + ", "+precio/cantidad+","
+                                                        + cantidad+")";
+            Sentencia_SQL.executeUpdate(sentencia);
+        }
+    } 
+    
+    public void getCliente(String usuario) throws SQLException{
+        String sentencia = "SELECT DNI, ID_DIRECCION FROM CLIENTE WHERE USUARIO = '"+usuario+"'";
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
+    public void getEmpresa (String usuario) throws SQLException{
+        String sentencia = "SELECT NIF, ID_DIRECCION FROM EMPRESA WHERE USUARIO = '"+usuario+"'";
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
+    public void getAllPedido() throws SQLException{
+        String sentencia = "SELECT ID, USUARIO, DNI_NIF, ID_DIR, FECHA, PRECIO_TOTAL FROM LISTA_PEDIDOS ORDER BY ID DESC";
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
+    
+    public void getProductoPed(int id) throws SQLException{
+        String sentencia = "SELECT ID, ID_LISTA_PED, PED.REF AS REF, PRO.NOMBRE AS NOMBRE , PRECIO, CANTIDAD FROM PEDIDO PED, PRODUCTO PRO WHERE PED.ID_LISTA_PED = "+id+" "
+                + " AND PED.REF = PRO.REF";
+       Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
+    
+    public void getDireccion(int id) throws SQLException{
+        String sentencia = "SELECT CALLE, POBLACION, CODIGO_POSTAL, PROVINCIA, PAIS, TLFN1, TLFN2 FROM DIRECCION "
+                + "WHERE ID = "+id;
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
+    
 }
+    

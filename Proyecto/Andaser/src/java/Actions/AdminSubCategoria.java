@@ -127,7 +127,7 @@ public class AdminSubCategoria extends ActionSupport{
          array_Cat = aAux;
          ActionContext.getContext().getSession().put(("vista"), "views/adminSubcategoria.jsp");
            context.setAttribute("aCat", array_Cat);
-            context.setAttribute("objeto", aSubCat);
+            ActionContext.getContext().getSession().put("objeto", aSubCat);
          
          
          return SUCCESS;

@@ -16,13 +16,13 @@
                             <s:form action="login">
                                 
                                 <div class="form-group" >
-                                    <s:textfield name="user" label="Usuario" ng-model="user.nombre" placeholder="usuario" cssClass="form-control"/>
+                                    <s:textfield name="user" label="Usuario" ng-model="user.nombre" placeholder="usuario" cssClass="form-control" required="true"/>
                                 </div>
                                 <div clasS="form-group">
-                                    <s:password name="password" label="Contraseña" ng-model="user.password" placeholder="contraseña" cssClass="form-control"/>
+                                    <s:password name="password" label="Contraseña" ng-model="user.password" placeholder="contraseña" cssClass="form-control" required="true"/>
                                 </div>
                                 <div class="form-group">
-                                    <s:submit value="Acceder" cssClass="btn btn-default" />
+                                    <s:submit value="Acceder" ng-disabled="" cssClass="btn btn-default" />
                                 </div>
                                
                             </s:form>

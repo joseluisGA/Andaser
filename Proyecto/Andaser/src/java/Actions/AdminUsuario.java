@@ -87,8 +87,8 @@ public class AdminUsuario extends ActionSupport{
         while(co.Obtener_Siguiente()){
             array_u_0.add(new Usuario(co.Obtener_Actual("NOMBRE"), null, co.Obtener_Actual("EMAIL"), co.Obtener_ID_Actual("ROL")));
         }
-        context.setAttribute("objeto", array_u);
-        context.setAttribute("objeto0", array_u_0);
+        ActionContext.getContext().getSession().put("objeto", array_u);
+        ActionContext.getContext().getSession().put("objeto0", array_u_0);
         
         ActionContext.getContext().getSession().put(("vista"), "views/adminUsuario.jsp");
         
