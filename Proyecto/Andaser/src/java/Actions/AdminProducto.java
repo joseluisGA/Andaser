@@ -9,6 +9,7 @@ import Modelos.Categoria;
 import Modelos.Producto;
 import Modelos.Subcategoria;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -146,7 +147,7 @@ public class AdminProducto extends ActionSupport{
             switch(service){
                 case "insertar":
                     co.InsertarProducto(REF, nombre, REF, nombreCat, nombreSubCat, precio1, precio2, ficha, imagen);
-                    context.setAttribute(("vista"), "views/adminProducto.jsp");
+                     ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
                     break;
                 case "modificar":
                     if(detalles==null){
@@ -156,22 +157,22 @@ public class AdminProducto extends ActionSupport{
                         pro = new Producto(co.Obtener_Actual("REF"), co.Obtener_Actual("NOMBRE"), co.Obtener_Actual("DESCRIPCION"),co.Obtener_ID_Actual("ID_CATEGORIA"), co.Obtener_ID_Actual("ID_SUBCATEGORIA"), co.Obtener_ID_Actual("PRECIO1"), co.Obtener_ID_Actual("PRECIO2"), co.Obtener_Actual("FICHA"), co.Obtener_Actual("IMAGEN"));
                     }
                     context.setAttribute(("pro"), pro);
-                    context.setAttribute(("vista"), "views/modProducto.jsp");
+                    ActionContext.getContext().getSession().put(("vista"), "views/modProducto.jsp");
                     }
                     else{
                         co.ModificarProducto(REF, nombre, descripcion, nombreCat, nombreSubCat, precio1, precio2, ficha, imagen);
-                        context.setAttribute(("vista"), "views/adminProducto.jsp");
+                         ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
                     }
                     break;
                 case "borrar":
                     co.BorrarProducto(REF);
-                    context.setAttribute(("vista"), "views/adminProducto.jsp");
+                     ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
                     break;
                    
             }
             }
         else{
-            context.setAttribute(("vista"), "views/adminProducto.jsp");
+             ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
         }
          co.getAllCategoria();
          while (co.Obtener_Siguiente()){  

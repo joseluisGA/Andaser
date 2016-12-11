@@ -21,7 +21,7 @@ public class LogOut extends ActionSupport{
     public String execute(){
          ServletContext context = ServletActionContext.getServletContext();
           ActionContext.getContext().getSession().put("usuario", null);
-          context.setAttribute("vista", "views/galeria.jsp");
+          ActionContext.getContext().getSession().put("vista", "views/galeria.jsp");
         
         return SUCCESS;
     }

@@ -3,9 +3,9 @@
 <div ng-controller="registro">
     <div class="col-md-6 col-md-offset-3">
         
-        <s:property value="#application.rol" />
+        
                     <div class="panel panel-default">
-                        <s:if test="#application.rol==2">
+                        <s:if test="#session.rol==2">
                         <div class="panel-heading">Registro de particular</div>
                         <div class="panel-body" >
                            
@@ -57,7 +57,7 @@
                            
                         </div>
                          </s:if> 
-                        <s:if test="#application.rol==3}">
+                        <s:if test="#session.rol==3}">
                              <div class="panel-heading">Registro de empresa</div>
                         <div class="panel-body" >
                            

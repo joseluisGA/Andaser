@@ -6,12 +6,13 @@
 <html ng-app="mainApp">
     <head>
        
-       <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!--
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!--
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js" type="text/javascript"></script>-->
-       <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-       
+      
+     
+       <script src="js/bootstrap.js" type="text/javascript"></script>
        <script src="js/angular.min.js" type="text/javascript"></script>
        
        <script src="js/angular-route.min.js" type="text/javascript"></script>
@@ -40,7 +41,7 @@
         <div class="container" style="padding:2%">
             <div class="row">
                
-                   <div ng-include="'<s:property value="#application.vista"/>'"></div>
+                   <div ng-include="'<s:property value="#session.vista"/>'"></div>
                 <!--<div ng-view></div>-->
                    
             </div>

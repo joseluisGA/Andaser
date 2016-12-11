@@ -438,4 +438,23 @@ public class Conexion {
         Sentencia_SQL.executeUpdate(sentencia);
     }
 
+    
+    //------------------------------------------ZONA USUARIO--------------------------//
+    public void getProductoCat(int id) throws SQLException{
+        String sentencia = "SELECT REF, NOMBRE, DESCRIPCION,ID_CATEGORIA, ID_SUBCATEGORIA, PRECIO1, PRECIO2, FICHA, IMAGEN FROM PRODUCTO WHERE ID_CATEGORIA  = "+id;
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
+    
+    public void getProductoSubCat (int id) throws SQLException{
+        String sentencia = "SELECT REF, NOMBRE, DESCRIPCION,ID_CATEGORIA, ID_SUBCATEGORIA, PRECIO1, PRECIO2, FICHA, IMAGEN FROM PRODUCTO WHERE ID_SUBCATEGORIA  = "+id;
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
+    
+    public void getBusqueda(String parametro) throws SQLException{
+        String sentencia = "SELECT REF, NOMBRE, DESCRIPCION,ID_CATEGORIA, ID_SUBCATEGORIA, PRECIO1, PRECIO2, FICHA, IMAGEN FROM PRODUCTO"
+                + " WHERE UPPER(REF)  LIKE UPPER(%'"+parametro+"'%) "
+                + "OR UPPER(NOMBRE) LIKE UPPER(%'"+parametro+"'%) "
+                + "OR UPPER (DESCRIPCION) LIKE UPPER(%'"+parametro+"'%)";
+        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
+    }
 }

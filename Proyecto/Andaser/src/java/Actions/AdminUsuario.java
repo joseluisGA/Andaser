@@ -6,6 +6,7 @@
 package Actions;
 
 import Modelos.Usuario;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class AdminUsuario extends ActionSupport{
         context.setAttribute("objeto", array_u);
         context.setAttribute("objeto0", array_u_0);
         
-        context.setAttribute(("vista"), "views/adminUsuario.jsp");
+        ActionContext.getContext().getSession().put(("vista"), "views/adminUsuario.jsp");
         
         
         return SUCCESS;

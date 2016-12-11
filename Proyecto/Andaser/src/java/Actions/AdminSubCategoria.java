@@ -7,6 +7,7 @@ package Actions;
 
 import Modelos.Categoria;
 import Modelos.Subcategoria;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -124,7 +125,7 @@ public class AdminSubCategoria extends ActionSupport{
                aAux.add(aux);
          }
          array_Cat = aAux;
-         context.setAttribute(("vista"), "views/adminSubcategoria.jsp");
+         ActionContext.getContext().getSession().put(("vista"), "views/adminSubcategoria.jsp");
            context.setAttribute("aCat", array_Cat);
             context.setAttribute("objeto", aSubCat);
          

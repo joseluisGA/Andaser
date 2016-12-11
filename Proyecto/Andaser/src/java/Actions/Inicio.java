@@ -7,6 +7,7 @@ package Actions;
 
 import Modelos.Categoria;
 import Modelos.Subcategoria;
+import com.opensymphony.xwork2.ActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
@@ -96,7 +97,7 @@ public class Inicio extends ActionSupport{
          aCat = aAux;
           
             context.setAttribute("aCat", aCat);
-            context.setAttribute("vista", "views/galeria.jsp");
+           ActionContext.getContext().getSession().put("vista", "views/galeria.jsp");
         
      
      

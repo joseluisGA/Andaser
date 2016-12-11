@@ -37,3 +37,27 @@ footer{
     border-bottom-right-radius: 5%;
     border-bottom-left-radius: 5%;
 }
+.producto{
+    margin-right: 5%; 
+    margin-bottom: 5%;
+    margin-top: 5%; 
+   
+    width: 500px; 
+    height: 300px; 
+    
+    font-size: 30px;
+}
+.añadir{
+    padding-left: 20%; 
+    background-color: black;
+    color: #C80B21;
+    
+    
+}
+.producto.añadir{
+    padding-left: 20%; 
+    
+    color: #C80B21;
+    
+    
+}
