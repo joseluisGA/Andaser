@@ -57,7 +57,7 @@
                            
                         </div>
                          </s:if> 
-                        <s:if test="#session.rol==3}">
+                        <s:if test="#session.rol==3">
                              <div class="panel-heading">Registro de empresa</div>
                         <div class="panel-body" >
                            

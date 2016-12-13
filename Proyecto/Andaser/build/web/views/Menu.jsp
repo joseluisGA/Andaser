@@ -54,6 +54,7 @@
                     <s:param name="service">mostrar</s:param>
 
                 </s:url>
+                <s:if test="#session.usuario!=null">
                 <div class="navbar-left" ><s:a href="%{urlMostrarPed}"><img src="img/carro.png" alt="" class="carro"/>
                         <s:if test="#session.pedido==null">
                             0
@@ -63,6 +64,7 @@
                         </s:else>
                     </s:a>
                 </div>
+                </s:if>
                 <ul class="nav navbar-nav" >
                     <s:if test="#session.usuario==null">
                         <s:url action="../Redireccion.action" var="urlRedirect">

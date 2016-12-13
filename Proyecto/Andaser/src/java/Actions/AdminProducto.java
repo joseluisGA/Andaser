@@ -146,10 +146,14 @@ public class AdminProducto extends ActionSupport{
         if(service!=null){
             switch(service){
                 case "insertar":
+                    //Inserta un nuevo producto
                     co.InsertarProducto(REF, nombre, REF, nombreCat, nombreSubCat, precio1, precio2, ficha, imagen);
                      ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
                     break;
                 case "modificar":
+                    //Modifica un producto
+                    
+                    //Si no se ha pulsado el botón de detalles, recoge los datos del producto
                     if(detalles==null){
                     
                     co.GetProducto(REF);
@@ -160,11 +164,14 @@ public class AdminProducto extends ActionSupport{
                     ActionContext.getContext().getSession().put(("vista"), "views/modProducto.jsp");
                     }
                     else{
+                        //Si se ha detalles es true, significa que viene desde la página de detalle
+                        //Por lo que modifica el producto
                         co.ModificarProducto(REF, nombre, descripcion, nombreCat, nombreSubCat, precio1, precio2, ficha, imagen);
                          ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
                     }
                     break;
                 case "borrar":
+                    //Borra un producto
                     co.BorrarProducto(REF);
                      ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
                     break;
@@ -174,6 +181,7 @@ public class AdminProducto extends ActionSupport{
         else{
              ActionContext.getContext().getSession().put(("vista"), "views/adminProducto.jsp");
         }
+        //Obtiene los productos 
          co.getAllCategoria();
          while (co.Obtener_Siguiente()){  
           

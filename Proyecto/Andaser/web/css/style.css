@@ -2,6 +2,9 @@
      width: 90%;
    
 }
+a:visited{
+    color: #08088e;
+}
 .distribuidores{
     width:75%;
     height: 75%;

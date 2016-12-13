@@ -298,6 +298,7 @@ public class Conexion {
     public void ModificarProducto(String REF, String nombre, String desc, 
             String nombreCat, String nombreSubCat,int precio1,int precio2,
              String ficha, String imagen) throws SQLException{
+        String sentencia="";
         int idCat=0, idSubCat=0;
          this.getCategoria(nombreCat);
          if(this.Obtener_Siguiente()){
@@ -307,7 +308,8 @@ public class Conexion {
         if(this.Obtener_Siguiente()){
             idSubCat = this.Obtener_ID_Actual("ID");
         }
-        String sentencia ="UPDATE PRODUCTO SET NOMBRE = '"+nombre+"', "
+        if (ficha!=null && imagen!=null){
+        sentencia ="UPDATE PRODUCTO SET NOMBRE = '"+nombre+"', "
                                             + "DESCRIPCION = '"+desc+"',"
                                             + "ID_CATEGORIA = "+idCat+","
                                             + "ID_SUBCATEGORIA = "+idSubCat+","
@@ -316,6 +318,39 @@ public class Conexion {
                                             + "FICHA = '"+ficha+"',"
                                             + "IMAGEN = '"+imagen+"'"
                             + "WHERE REF = '"+REF+"'";
+        }
+        if(ficha!=null && imagen==null){
+             sentencia ="UPDATE PRODUCTO SET NOMBRE = '"+nombre+"', "
+                                            + "DESCRIPCION = '"+desc+"',"
+                                            + "ID_CATEGORIA = "+idCat+","
+                                            + "ID_SUBCATEGORIA = "+idSubCat+","
+                                            + "PRECIO1 = "+precio1+","
+                                            + "PRECIO2 = "+precio2+","
+                                            + "FICHA = '"+ficha+"'"
+                            + "WHERE REF = '"+REF+"'";
+        }
+        if(ficha==null && imagen!=null){
+             sentencia ="UPDATE PRODUCTO SET NOMBRE = '"+nombre+"', "
+                                            + "DESCRIPCION = '"+desc+"',"
+                                            + "ID_CATEGORIA = "+idCat+","
+                                            + "ID_SUBCATEGORIA = "+idSubCat+","
+                                            + "PRECIO1 = "+precio1+","
+                                            + "PRECIO2 = "+precio2+","
+                                            
+                                            + "IMAGEN = '"+imagen+"'"
+                            + "WHERE REF = '"+REF+"'";
+        }
+        if(ficha==null && imagen==null){
+            sentencia ="UPDATE PRODUCTO SET NOMBRE = '"+nombre+"', "
+                                            + "DESCRIPCION = '"+desc+"',"
+                                            + "ID_CATEGORIA = "+idCat+","
+                                            + "ID_SUBCATEGORIA = "+idSubCat+","
+                                            + "PRECIO1 = "+precio1+","
+                                            + "PRECIO2 = "+precio2+","
+                                            
+                                           
+                            + "WHERE REF = '"+REF+"'";
+        }
         Sentencia_SQL.executeUpdate(sentencia);
     }
 

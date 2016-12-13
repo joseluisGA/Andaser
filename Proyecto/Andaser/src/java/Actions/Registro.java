@@ -16,14 +16,14 @@ import java.util.Random;
 import javax.servlet.ServletContext;
 import org.apache.struts2.ServletActionContext;
 import java.util.Properties;
-import javax.mail.Message;
+/*import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage;*/
 
 /**
  *
@@ -178,7 +178,7 @@ public class Registro extends ActionSupport {
     public static void setLOG(Logger LOG) {
         ActionSupport.LOG = LOG;
     }
-    
+    /*
     private void EnviarCorreo(String to ) throws AddressException, MessagingException{
         Session session = Session.getDefaultInstance(properties,  
             new javax.mail.Authenticator() {
@@ -206,7 +206,7 @@ public class Registro extends ActionSupport {
                          + "/n"
                  + "Si ha recibido este correo por error, por favor conteste a este mismo mensaje y notifíquelo. Muchas gracias.");
          Transport.send(message);
-    }
+    }*/
 
     private String generarPass() {
         String pass = "";
@@ -226,7 +226,7 @@ public class Registro extends ActionSupport {
     }
 
     @Override
-    public String execute() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalAccessException, IllegalAccessException, SQLException, MessagingException {
+    public String execute() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalAccessException, IllegalAccessException, SQLException {
         Conexion co = new Conexion("andaser", "root", "root");
         ServletContext context = ServletActionContext.getServletContext();
         co.existeUsuario(this.usuario);
@@ -257,7 +257,7 @@ public class Registro extends ActionSupport {
                         co.insertarUsuario(user);
                         
                         co.insertarCliente(cli, idDir);
-                        this.EnviarCorreo(this.email);
+//                        this.EnviarCorreo(this.email);
                         
                         }
                         break;

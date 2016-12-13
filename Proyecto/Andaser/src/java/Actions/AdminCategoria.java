@@ -92,7 +92,7 @@ public class AdminCategoria extends ActionSupport{
               ServletContext context = ServletActionContext.getServletContext();
             String resultado = SUCCESS;
             Conexion co = new Conexion("andaser", "root", "root");
-            
+            //Comprueba a través de la variable "service" la función que se va a realizar
             if(service!=null){
             switch(service){
                 case "insertar":
@@ -107,6 +107,7 @@ public class AdminCategoria extends ActionSupport{
                    
             }
             }
+            //Obtiene todas las categorías disponibles
             co.getAllCategoria();
          while (co.Obtener_Siguiente()){  
           
@@ -128,6 +129,7 @@ public class AdminCategoria extends ActionSupport{
                aAux.add(aux);
          }
          array_Cat = aAux;
+         //Añade el array al contexto de la aplicación
         ActionContext.getContext().getSession().put(("vista"), "views/adminCategoria.jsp");
            context.setAttribute("aCat", array_Cat);
             return resultado;

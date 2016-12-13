@@ -31,8 +31,8 @@
                           <s:hidden name="precio" value="%{#session.producto.precio2}"/>
                      </s:if>
                       <div style="width:10% ">
-                      <input type="number" name="cantidad" class="form-control" placeholder="Cantidad"  value="1"/>
-                      <s:submit name="service" value="Agregar" cssClass="btn btn-default"/>
+                       <input type="number" name="cantidad" class="form-control" placeholder="Cantidad"  value="1"/>
+                          <s:submit name="service" value="Agregar" cssClass="btn btn-default"/>
                        </div>
                     
                 </s:form>

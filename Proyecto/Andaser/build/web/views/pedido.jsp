@@ -19,7 +19,7 @@
                         <td><s:property value="REF"/></td>
                         <td><s:property value="nombrePro"/></td>
                         <td><s:property value="cantidad"/></td>
-                        <td><s:property value="precio"/></td>
+                        <td><s:property value="precio"/>€</td>
                         <td><s:a href="%{urlBorrarPro}"><button type="button" class="btn btn-default">Borrar</button></s:a></td>
 
                         </tr>
@@ -27,15 +27,17 @@
                 </s:iterator>
 
                 <tr>
-                    <td></td><td></td><td>Precio total: </td><td><s:property value="#session.pedido.precio_total"/></td> 
+                    <td></td><td></td><td>Precio total: </td><td><s:property value="#session.pedido.precio_total"/>€</td> 
                 </tr>
                 <s:url action="../AdminPedido.action" var="urlRealizarPed">
                     <s:param name="service">realizar</s:param>
 
                 </s:url>
+                <s:if test="#session.usuario.rol!=1">
                 <tr>
                     <td></td><td></td><td></td><td><s:a href="%{urlRealizarPed}"><button type="button" class="btn btn-default">Realizar</button></s:a></td>
                     </tr>
+                </s:if>
                 </table>
         </s:else>
 
