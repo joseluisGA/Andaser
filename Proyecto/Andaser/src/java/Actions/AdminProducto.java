@@ -205,7 +205,7 @@ public class AdminProducto extends ActionSupport{
          }
          array_c = aAux;
          
-           context.setAttribute("aCat", array_c);
+           
             ActionContext.getContext().getSession().put("aSubCat", array_s);
          co.GetAllProducto();
          while(co.Obtener_Siguiente()){

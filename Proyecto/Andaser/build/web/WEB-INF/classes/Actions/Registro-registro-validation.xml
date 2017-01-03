@@ -1,0 +1,50 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+        
+<validators>
+    <field name="email">
+        <field-validator type="email">
+            <message>El formato del campo 'email' es incorrecto</message>
+        </field-validator>
+    </field>
+    <field name="dni">
+        <field-validator type="stringlength">
+            <param name="minlength">9</param>
+            <param name="maxlength">9</param>
+            <message>El dni debe tener 9 caracteres</message>
+        </field-validator>  
+    </field>
+     <field name="nif">
+        <field-validator type="stringlength">
+            <param name="minlength">9</param>
+            <param name="maxlength">9</param>
+            <message>El nif debe tener 9 caracteres</message>
+        </field-validator>  
+    </field>
+    <field name="cp">
+        <field-validator type="stringlength">
+            <param name="minlength">5</param>
+            <param name="maxlength">5</param>
+            <message>El código postal solo puede tener 5 dígitos</message>
+        </field-validator>
+    </field>
+    <field name="tlfn1">
+        <field-validator type="stringlength">
+            <param name="minlength">9</param>
+            <param name="maxlength">9</param>
+            <message>El número de teléfono debe tener 9 dígitos</message>
+        </field-validator>
+    </field>
+     <field name="tlfn2">
+        <field-validator type="stringlength">
+            <param name="minlength">9</param>
+            <param name="maxlength">9</param>
+            <message>El número de teléfono debe tener 9 dígitos</message>
+        </field-validator>
+    </field>
+</validators>
+
+
+<root>
+    
+</root>

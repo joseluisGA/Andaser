@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>web/js/controllers.js</url>
+            <bookmark id="1">
+                <name/>
+                <line>31</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/AdminPedido.java</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/json/provincias.json</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/index.jsp</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/AdminCategoria.java</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/js/controllers.js</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/registro.jsp</file>
-            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/AdminProducto.java</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/web/views/Menu.jsp</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/Registro.java</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/Conexion.java</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/Redirect.java</file>
+            <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/Login.java</file>
             <file>file:/C:/Users/minit/OneDrive/Documentos/Proyecto/Andaser/src/java/Actions/AdminUsuario.java</file>
         </group>
     </open-files>

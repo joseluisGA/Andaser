@@ -4,7 +4,7 @@
 <div class="col-md-12 contenido">
      
             <table class="table">
-                <th>Usuario</th><th>Documento identidad</th><th>Fecha</th><th>Precio</th>
+                <th>Usuario</th><th>Documento</th><th>Fecha</th><th>Precio</th>
                     <s:iterator value="#session.array_list_ped"> 
                     <tr>
                          <s:url action="../AdminPedido.action" var="urlDetallesPed">

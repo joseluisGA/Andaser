@@ -127,11 +127,14 @@ public class AdminCategoria extends ActionSupport{
                 }
                
                aAux.add(aux);
+               aSubCat = new ArrayList();
          }
          array_Cat = aAux;
+          
+            context.setAttribute("aCat", array_Cat);
          //Añade el array al contexto de la aplicación
         ActionContext.getContext().getSession().put(("vista"), "views/adminCategoria.jsp");
-           context.setAttribute("aCat", array_Cat);
+           
             return resultado;
         } catch (InstantiationException ex) {
             Logger.getLogger(AdminCategoria.class.getName()).log(Level.SEVERE, null, ex);
