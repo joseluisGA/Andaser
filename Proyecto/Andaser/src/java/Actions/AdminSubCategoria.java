@@ -103,7 +103,7 @@ public class AdminSubCategoria extends ActionSupport{
                    
             }
            }
-           co.getAllCategoria();
+          co.getAllCategoria();
          while (co.Obtener_Siguiente()){  
           
               array_Cat.add(new Categoria(co.Obtener_ID_Actual("ID"),co.Obtener_Actual("NOMBRE") ));  
@@ -117,27 +117,16 @@ public class AdminSubCategoria extends ActionSupport{
                 while(co.Obtener_Siguiente()){
                   if(co.Obtener_Actual("ID")!=null){
                       aSubCat.add(new Subcategoria(co.Obtener_ID_Actual("ID"),aux.getId(), co.Obtener_Actual("NOMBRE")));
+                      
                      aux.setSubcategoria((ArrayList<Subcategoria>) aSubCat);  
                   }  
                 }
                
                aAux.add(aux);
-               aSubCat = new ArrayList();
          }
          array_Cat = aAux;
-          
-            context.setAttribute("aCat", array_Cat);
-           
-             co.getAllSubCategoria();
-                
-                while(co.Obtener_Siguiente()){
-                 if(co.Obtener_Actual("ID")!=null){
-                     aSubCat.add(new Subcategoria(co.Obtener_ID_Actual("ID"),co.Obtener_ID_Actual("ID_CATEGORIA"), co.Obtener_Actual("NOMBRE")));
-                 }  
-                }
-
          ActionContext.getContext().getSession().put(("vista"), "views/adminSubcategoria.jsp");
-          
+           context.setAttribute("aCat", array_Cat);
             ActionContext.getContext().getSession().put("objeto", aSubCat);
          
          

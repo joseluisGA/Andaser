@@ -24,7 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body >
+    <body ng-controller="mainController">
      
        
         
@@ -48,8 +48,10 @@
         </div>
                 
                 <br/>
+
        
        
+            
         <!----------------Footer------------------->
         <div ng-include="'views/footer.jsp'" style="margin-top: 20px;"></div>
    

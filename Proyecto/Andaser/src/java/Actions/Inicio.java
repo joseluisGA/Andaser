@@ -93,7 +93,6 @@ public class Inicio extends ActionSupport{
                 }
                
                aAux.add(aux);
-               aSubCat = new ArrayList();
          }
          aCat = aAux;
           

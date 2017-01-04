@@ -213,7 +213,6 @@ public class Conexion {
     }
     //-----------------------------Mantenimiento de subcategorías---------------//
 
-    
     public void getSubCategoria(int id) throws SQLException {
         String sentencia = "SELECT ID, ID_CATEGORIA, NOMBRE FROM SUBCATEGORIA WHERE ID_CATEGORIA = '" + id + "'";
         Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
@@ -223,7 +222,7 @@ public class Conexion {
         Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
     }
 
-    public void getAllSubCategoria() throws SQLException {
+    public void getAllSubCategoria(int id) throws SQLException {
         String sentencia = "SELECT ID, ID_CATEGORIA, NOMBRE FROM SUBCATEGORIA";
         Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
     }
@@ -240,11 +239,20 @@ public class Conexion {
     public void ModificarSubCategoria(int id, String nombreCat, String nombre) throws SQLException {
         getCategoria(nombreCat);
           String sentencia = "";
-        if(Obtener_Siguiente()){             
-            sentencia = "UPDATE SUBCATEGORIA SET ID_CATEGORIA ='" + Obtener_ID_Actual("ID") + "', NOMBRE ='" + nombre + "' WHERE ID = '" + id + "'";                           
+        if(Obtener_Siguiente()){
+      
+        if (Obtener_ID_Actual("ID") != 0 && (nombre != null || !nombre.equals(""))) {
+            sentencia = "UPDATE SUBCATEGORIA SET ID_CATEGORIA ='" + Obtener_ID_Actual("ID") + "', NOMBRE ='" + nombre + "' WHERE ID = '" + id + "'";
+
         }
-        else{          
-            sentencia = "UPDATE SUBCATEGORIA SET NOMBRE ='" + nombre + "' WHERE ID = '" + id + "'";       
+        if (Obtener_ID_Actual("ID") != 0 && (nombre == null || nombre.equals(""))) {
+            sentencia = "UPDATE SUBCATEGORIA SET ID_CATEGORIA ='" +Obtener_ID_Actual("ID") + "' WHERE ID = '" + id + "'";
+
+        }
+        if (Obtener_ID_Actual("ID") == 0 && (nombre != null || !nombre.equals(""))) {
+            sentencia = "UPDATE SUBCATEGORIA SET NOMBRE ='" + nombre + "' WHERE ID = '" + id + "'";
+        }
+        
         }
         Sentencia_SQL.executeUpdate(sentencia);
     }
@@ -406,9 +414,7 @@ public class Conexion {
                 + "','" + dir.getCp()
                 + "','" + dir.getProvincia()
                 + "','" + dir.getPais()
-                + "','" + dir.getTlfn1()
-                +"',NULL)";
-             Sentencia_SQL.executeUpdate(sentencia);
+                + "','" + dir.getTlfn1()+"')";
         }
     }
 
@@ -461,20 +467,6 @@ public class Conexion {
         String sentencia = "DELETE FROM USUARIO WHERE NOMBRE = '"+usuario+"'";
         Sentencia_SQL.executeUpdate(sentencia);
     }
-    public void getCliente_Direccion(String usuario)  throws SQLException{
-        String sentencia = "SELECT C.DNI, C.NOMBRE, C.APELLIDO1, C.APELLIDO2, "
-                + "D.CALLE, D.POBLACION, D.CODIGO_POSTAL, D.PROVINCIA, D.TLFN1, D.TLFN2 "
-                + "FROM CLIENTE C , DIRECCION D"
-                + "WHERE C.USUARIO = '"+usuario+"' AND C.ID_DIRECCION = D.ID ";
-        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
-    }
-    public void getEmpresa_Direccion(String usuario)  throws SQLException{
-        String sentencia = "SELECT E.NIF, E.NOMBRE_EMPRESA, "
-                + "D.CALLE, D.POBLACION, D.CODIGO_POSTAL, D.PROVINCIA, D.TLFN1, D.TLFN2 "
-                + "FROM EMPRESA E , DIRECCION D"
-                + "WHERE E.USUARIO = '"+usuario+"' AND E.ID_DIRECCION = D.ID ";
-        Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
-    }
     public void getUserSinConfirmar () throws SQLException{
         String sentencia = "SELECT NOMBRE, PASSWORD, EMAIL, ROL,USUARIOCONFIRMADO ,CONTRASENYACAMBIADA FROM USUARIO WHERE USUARIOCONFIRMADO = 0";
          Conj_Registros  = Sentencia_SQL.executeQuery(sentencia);
@@ -484,10 +476,6 @@ public class Conexion {
         Sentencia_SQL.executeUpdate(sentencia);
     }
 
-    public void CambiarPass(String pass, String usuario) throws SQLException{
-        String sentencia = "UPDATE USUARIO SET PASSWORD = '"+pass+"', CONTRASENYACAMBIADA = 1 WHERE NOMBRE = '"+usuario+"'";
-        Sentencia_SQL.executeUpdate(sentencia);
-    }
     
     //------------------------------------------ZONA USUARIO--------------------------//
     public void getProductoCat(int id) throws SQLException{
@@ -516,7 +504,7 @@ public class Conexion {
                                                             "', '"+DOC+
                                                             "', "+idDir+
                                                             ", '"+fecha+
-                                                            "' ,"+precio_total+", 0)";
+                                                            "' ,"+precio_total+")";
         
         Sentencia_SQL.executeUpdate(sentencia);
         
@@ -528,7 +516,7 @@ public class Conexion {
                                                 + " AND DNI_NIF = '"+DOC+" '"
                                                 + " AND ID_DIR = "+idDir+
                                                   " AND FECHA = '"+fecha+" '"
-                                                + " AND PRECIO_TOTAL = "+precio_total+"";
+                                                + " AND PRECIO_TOTAL = "+precio_total;
         Conj_Registros = Sentencia_SQL.executeQuery(sentencia);
         
         if(Obtener_Siguiente()){

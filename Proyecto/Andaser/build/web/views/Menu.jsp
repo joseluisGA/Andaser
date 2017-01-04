@@ -54,25 +54,27 @@
                     <s:param name="service">mostrar</s:param>
 
                 </s:url>
-               
-                <ul class="nav navbar-nav" >
-                     <s:if test="#session.usuario!=null">
-                    <s:if test="#session.usuario.nombre!='admin'">
-                        <li style= "color:#08088e; font-weight: bold;"><s:a href="%{urlMostrarPed}">Pedido
-                               
-                            </s:a>
-                        </li>
-                    </s:if>
+                <s:if test="#session.usuario!=null">
+                <div class="navbar-left" ><s:a href="%{urlMostrarPed}"><img src="img/carro.png" alt="" class="carro"/>
+                        <s:if test="#session.pedido==null">
+                            0
+                        </s:if>
+                        <s:else>
+                            <s:property value="#session.pedido.array_ped.size()"/>
+                        </s:else>
+                    </s:a>
+                </div>
                 </s:if>
+                <ul class="nav navbar-nav" >
                     <s:if test="#session.usuario==null">
                         <s:url action="../Redireccion.action" var="urlRedirect">
                             <s:param name="template">login</s:param>
                         </s:url>
-                        <li style= "color:#08088e; font-weight: bold;"><s:a href="%{urlRedirect}">Acceso</s:a></li>
+                        <li style= "color:#08088e; font-weight: bold;"><s:a href="%{urlRedirect}">Acceso clientes</s:a></li>
                         </s:if>
                         <s:else>
-
-                        <s:url action="../LogOut.action" var="urlLogOut"/>
+                        <li><div  style= "color:#08088e; font-weight: bold;">Bienvenido</div><s:property value="#session.usuario.nombre"/></li>
+                            <s:url action="../LogOut.action" var="urlLogOut"/>
                         <li style= "color:#08088e; font-weight: bold;"><s:a href="%{urlLogOut}">Cerrar Sesión</s:a></li>
                         </s:else>
 

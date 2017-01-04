@@ -5,21 +5,21 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Acceder</div>
                         <div class="panel-body" >
-                            <s:if test="#session.error!=null">
+                            <s:if test="#session.errorlogin!=null">
                             <div class="alert alert-success alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
-                            <s:property value="#session.error"/>
+                            <s:property value="#session.errorlogin"/>
                         </div>
                         </s:if>
                             <!-- Hace el login para los usuarios, si los datos son erróneos, salta un mensaje de error.-->
                             <s:form action="login">
                                 
                                 <div class="form-group" >
-                                    <s:textfield name="user" label="Usuario"  placeholder="usuario" cssClass="form-control" required="true"/>
+                                    <s:textfield name="user" label="Usuario" ng-model="user.nombre" placeholder="usuario" cssClass="form-control" required="true"/>
                                 </div>
                                 <div clasS="form-group">
-                                    <s:password name="password" label="Contraseña"  placeholder="contraseña" cssClass="form-control" required="true"/>
+                                    <s:password name="password" label="Contraseña" ng-model="user.password" placeholder="contraseña" cssClass="form-control" required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <s:submit value="Acceder" ng-disabled="" cssClass="btn btn-default" />

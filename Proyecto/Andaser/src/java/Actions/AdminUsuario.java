@@ -5,25 +5,12 @@
  */
 package Actions;
 
-import static Actions.Registro.properties;
-import Modelos.Cliente;
-import Modelos.Direccion;
-import Modelos.Empresa;
 import Modelos.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import org.apache.struts2.ServletActionContext;
 
@@ -31,54 +18,11 @@ import org.apache.struts2.ServletActionContext;
  *
  * @author minit
  */
-public class AdminUsuario extends ActionSupport {
-
+public class AdminUsuario extends ActionSupport{
     private String usuario, password, email, service;
     private int rol;
     private List<Usuario> array_u = new ArrayList();
     private List<Usuario> array_u_0 = new ArrayList();
-    private Cliente cli;
-    private Empresa emp;
-    private Direccion dir;
-    static Properties properties = new Properties();
-
-    static {
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.port", "465");
-    }
-
-    private void EnviarCorreo(String to) throws AddressException, MessagingException {
-        Session session = Session.getDefaultInstance(properties,
-                new javax.mail.Authenticator() {
-            protected PasswordAuthentication
-                    getPasswordAuthentication() {
-                return new PasswordAuthentication("minitrampi@gmail.com", "minitrampi94");
-            }
-        });
-
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("minitrampi@gmail.com"));
-        message.setRecipients(Message.RecipientType.TO,
-                InternetAddress.parse(to));
-        message.setSubject("Solicitud de registro");
-        message.setText("Gracias por su solicitud de registro en www.comercialandaser.es."
-                + "\n "
-                + "Su usuario es: " + this.usuario
-                + "\n"
-                + "Su contraseña es: " + this.password + " \n "
-                + "En su próximo inicio de sesión podrá cambiarla."
-                + "\n"
-                + "\n"
-                + "\n"
-                + "\n"
-                + "\n"
-                + "Si ha recibido este correo por error, por favor conteste a este mismo mensaje y notifíquelo. Muchas gracias.");
-        Transport.send(message);
-    }
 
     public String getService() {
         return service;
@@ -88,6 +32,8 @@ public class AdminUsuario extends ActionSupport {
         this.service = service;
     }
 
+    
+    
     public String getUsuario() {
         return usuario;
     }
@@ -119,60 +65,35 @@ public class AdminUsuario extends ActionSupport {
     public void setRol(int rol) {
         this.rol = rol;
     }
-
-    public String execute() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, MessagingException {
-        ServletContext context = ServletActionContext.getServletContext();
+    
+    public String execute() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+         ServletContext context = ServletActionContext.getServletContext();
         Conexion co = new Conexion("andaser", "root", "root");
-        if (service != null) {
-            switch (service) {
-                case "borrar":
-                    co.BorrarUser(usuario);
-
-                    break;
-                case "confirmar":
-                    co.AceptarUsuario(usuario);
-                    co.getUser(usuario);
-                    if (co.Obtener_Siguiente()) {
-                        this.password = co.Obtener_Actual("PASSWORD");
-                        this.EnviarCorreo(co.Obtener_Actual("EMAIL"));
-                    }
-                    break;
-                case "detalles":
-                    if (rol == 2) {
-                        co.getCliente_Direccion(usuario);
-                        if (co.Obtener_Siguiente()) {
-                            cli = new Cliente(co.Obtener_Actual("DNI"), co.Obtener_Actual("NOMBRE"), co.Obtener_Actual("APELLIDO1"), co.Obtener_Actual("APELLIDO2"));
-                            dir = new Direccion(co.Obtener_Actual("CALLE"), co.Obtener_Actual("POBLACION"), co.Obtener_Actual("PROVINCIA"), co.Obtener_Actual("PAIS"), co.Obtener_ID_Actual("CODIGO_POSTAL"), co.Obtener_ID_Actual("TLFN1"), co.Obtener_ID_Actual("TLFN2"));
-                            cli.setDir(dir);
-                        }
-                    }
-                    if (rol == 3) {
-                        co.getEmpresa_Direccion(usuario);
-                        if (co.Obtener_Siguiente()) {
-                            emp = new Empresa(co.Obtener_Actual("NIF"), co.Obtener_Actual("NOMBRE_EMPRESA"));
-                            dir = new Direccion(co.Obtener_Actual("CALLE"), co.Obtener_Actual("POBLACION"), co.Obtener_Actual("PROVINCIA"), co.Obtener_Actual("PAIS"), co.Obtener_ID_Actual("CODIGO_POSTAL"), co.Obtener_ID_Actual("TLFN1"), co.Obtener_ID_Actual("TLFN2"));
-                            emp.setDir(dir);
-                        }
-                    }
-
-                    break;
-
-            }
-        } else {
-            if (service == null || service.equals("borrar")) {
-                co.getUsers();
-                while (co.Obtener_Siguiente()) {
-                    if (!co.Obtener_Actual("NOMBRE").equals("admin")) {
-                        array_u.add(new Usuario(co.Obtener_Actual("NOMBRE"), null, co.Obtener_Actual("EMAIL"), co.Obtener_ID_Actual("ROL"), co.Obtener_ID_Actual("USUARIOCONFIRMADO")));
-                    }
-                }
-
-                ActionContext.getContext().getSession().put("objeto", array_u);
-
-                ActionContext.getContext().getSession().put(("vista"), "views/adminUsuario.jsp");
-            }
+        if(service!=null){
+        switch(service){
+            case "borrar":
+                co.BorrarUser(usuario);
+                
+                break;
+            case "confirmar":
+                co.AceptarUsuario(usuario);
         }
+        }
+        co.getUsers();
+        while(co.Obtener_Siguiente()){
+            array_u.add(new Usuario(co.Obtener_Actual("NOMBRE"), null, co.Obtener_Actual("EMAIL"), co.Obtener_ID_Actual("ROL")));
+        }
+         co.getUserSinConfirmar();
+        while(co.Obtener_Siguiente()){
+            array_u_0.add(new Usuario(co.Obtener_Actual("NOMBRE"), null, co.Obtener_Actual("EMAIL"), co.Obtener_ID_Actual("ROL")));
+        }
+        ActionContext.getContext().getSession().put("objeto", array_u);
+        ActionContext.getContext().getSession().put("objeto0", array_u_0);
+        
+        ActionContext.getContext().getSession().put(("vista"), "views/adminUsuario.jsp");
+        
+        
         return SUCCESS;
     }
-
+    
 }

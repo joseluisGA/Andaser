@@ -6,7 +6,6 @@
 package Actions;
 
 import Modelos.Producto;
-import Modelos.Usuario;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
@@ -20,31 +19,13 @@ import org.apache.struts2.ServletActionContext;
  * @author minit
  */
 public class Redirect extends ActionSupport{
-    private String template, pass1, pass2;
+    private String template;
     private String rol;
     private int idCat, idSubCat;
     private String busqueda, REF;
     private List<Producto> array_p = new ArrayList();
     private Producto proDetalles;
 
-    public String getPass1() {
-        return pass1;
-    }
-
-    public void setPass1(String pass1) {
-        this.pass1 = pass1;
-    }
-
-    public String getPass2() {
-        return pass2;
-    }
-
-    public void setPass2(String pass2) {
-        this.pass2 = pass2;
-    }
-
-    
-    
     public String getREF() {
         return REF;
     }
@@ -98,25 +79,12 @@ public class Redirect extends ActionSupport{
     public String execute() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         ServletContext context = ServletActionContext.getServletContext();
         Conexion co = new Conexion("andaser", "root", "root");
-        ActionContext.getContext().getSession().put("error", null);
         if(template!=null){
         switch (template){
             case "login":
                  ActionContext.getContext().getSession().put("vista", "views/acceso.jsp");
             break;
-            case "Cambiar":
-               if(this.pass1.equals(this.pass2)){
-                  Usuario user = (Usuario) ActionContext.getContext().getSession().get("usuarioSP");
-                  co.CambiarPass(pass1, user.getNombre());
-                  ActionContext.getContext().getSession().put("usuario", user);
-                  ActionContext.getContext().getSession().put("usuarioSP", null);
-                  ActionContext.getContext().getSession().put("vista", "views/galeria.jsp");
-               }
-               else{
-                   ActionContext.getContext().getSession().put(("vista"), "views/cambiarPass.jsp");
-                   ActionContext.getContext().getSession().put(("error"), "Las contraseñas no coinciden");
-               }
-               break;
+            
             case "registro":
                  ActionContext.getContext().getSession().put(("rol"), rol);
                  ActionContext.getContext().getSession().put(("vista"), "views/registro.jsp");
