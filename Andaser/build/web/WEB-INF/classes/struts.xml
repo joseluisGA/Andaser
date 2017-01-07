@@ -1,0 +1,47 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <!-- Configuration for the default package. -->
+    <package name="default" namespace="/" extends="struts-default">
+        
+<result-types>
+   <result-type name="dispatcher" default="true"
+                class="org.apache.struts2.dispatcher.ServletDispatcherResult" />
+</result-types>
+        <action name="AdminCategoria" class="Actions.AdminCategoria">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="AdminSubCategoria" class="Actions.AdminSubCategoria">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="AdminProducto" class="Actions.AdminProducto">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="AdminUsuario" class="Actions.AdminUsuario">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="AdminPedido" class="Actions.AdminPedido">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        
+        
+        <action name="inicio" class="Actions.Inicio">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="login" class="Actions.Login">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="LogOut" class="Actions.LogOut">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="Redireccion" class="Actions.Redirect">
+            <result name="success" type="dispatcher">/index.jsp</result>
+        </action>
+        <action name="registro" class="Actions.Registro">
+            <result type="dispatcher">/index.jsp</result>
+        </action>
+    </package>
+</struts>

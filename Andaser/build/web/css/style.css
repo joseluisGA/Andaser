@@ -1,0 +1,78 @@
+.header{
+     width: 90%;
+   
+}
+a:visited{
+    color: #08088e;
+}
+.distribuidores{
+    width:75%;
+    height: 75%;
+    margin-top: 10px;
+    max-height: 200px;
+    max-width: 150px;
+}
+.menu{
+    background-color: #d9dbda;
+    width: 90%;
+    margin-left: 3.7%;
+   
+}
+.contenido{
+     background-color: #d9dbda;
+     border-radius: 3px;
+     padding: 10px;
+}
+.label{
+    color:black;
+}
+.navbar-default .navbar-brand{
+     color: #08088e;
+}
+.navbar-default .navbar-nav > li > a{
+    color:black;
+}
+.carousel-inner{
+    width: 75%;
+    margin-left: 11.5%;
+}
+
+.carousel-inner > .item > img{
+    width: 80%;
+    height: 80%;
+    max-height: 400px;
+    max-width: 1200px;
+}
+.carousel-caption {
+    font-size: 18px;
+}
+
+footer{
+    background-color: #d9dbda;
+    width: 75%;
+    margin-left: 11.5%;
+    border-bottom-right-radius: 5%;
+    border-bottom-left-radius: 5%;
+}
+.producto{
+    margin-right: 5%; 
+    margin-bottom: 5%;
+    margin-top: 5%; 
+    padding: 1%;
+    border: solid 1px black;
+    border-radius: 5px;
+   
+    
+    font-size: 16px;
+}
+.producto img{
+    width: 80%;
+    height: 80%;
+}
+
+.carro{
+    
+    width: 100px;
+    height: 50px;
+   
+}
