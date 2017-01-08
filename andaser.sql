@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2016 a las 23:19:51
+-- Tiempo de generación: 08-01-2017 a las 20:26:49
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -62,9 +62,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`ID`, `NOMBRE`) VALUES
-(3, 'Abrasivos'),
-(1, 'Barnices'),
-(2, 'Herrajes');
+(5, 'Abrasivos'),
+(6, 'Barnices'),
+(4, 'Herrajes');
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`DNI`, `usuario`, `nombre`, `apellido1`, `apellido2`, `ID_DIRECCION`) VALUES
-('sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdf', 8);
+('05722193T', 'Jose', 'Jose Luis', 'Gómez', 'Álvarez', 9);
 
 -- --------------------------------------------------------
 
@@ -110,14 +110,11 @@ CREATE TABLE `direccion` (
 --
 
 INSERT INTO `direccion` (`ID`, `CALLE`, `POBLACION`, `CODIGO_POSTAL`, `PROVINCIA`, `PAIS`, `TLFN1`, `TLFN2`) VALUES
-(1, 'tutyuy', 'tutyu', 4645, 'tyrrt', '4ytryrtytry', 456456, 474),
-(2, 'tutyuy', 'tutyu', 4645, 'tyrrt', '4ytryrtytry', 456456, 474),
-(3, 'jghjghj', 'ghjhgj', 4564, 'ghhfg', 'fghgfh', 4563, 346364),
 (4, 'jghjghj', 'ghjhgj', 4564, 'ghhfg', 'fghgfh', 4563, 346364),
-(5, 'werwer', 'werwree', 24, 'erwewrwer', 'werwer', 234234, 234234),
-(6, 'gbgb', 'gbgbg', 4335, 'fgfdgfgfd', 'fgfg', 345345, 345345),
-(7, 'fdgdfgdf', 'gdfgdfg', 34534534, 'gfdgdf', 'dfgdfgd', 252325, 23425),
-(8, 'sdfsdf', 'sdfsdf', 123123, 'sdfsdf', 'fsdfsd', 234234, 234234);
+(9, 'Bernardas 22', 'Almagro', 13270, 'Ciudad Real', 'España', 699616687, 53543453),
+(19, 'asd', 'asd', 123, 'asd', 'asd', 123, NULL),
+(21, 'Bernardas 22', 'Almagro', 13270, 'Ciudad Real', 'España', 699616687, 926860358),
+(22, 'Bernardas 22', 'Almagro', 13270, 'Ciudad Real', 'España', 699616687, NULL);
 
 -- --------------------------------------------------------
 
@@ -147,19 +144,21 @@ INSERT INTO `empresa` (`NIF`, `NOMBRE_EMPRESA`, `USUARIO`, `ID_DIRECCION`) VALUE
 
 CREATE TABLE `lista_pedidos` (
   `ID` int(11) NOT NULL,
-  `USUARIO` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `USUARIO` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
   `DNI_NIF` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `ID_DIR` int(11) NOT NULL,
   `FECHA` date NOT NULL,
-  `PRECIO_TOTAL` int(11) NOT NULL
+  `PRECIO_TOTAL` int(11) NOT NULL,
+  `ACEPTADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `lista_pedidos`
 --
 
-INSERT INTO `lista_pedidos` (`ID`, `USUARIO`, `DNI_NIF`, `ID_DIR`, `FECHA`, `PRECIO_TOTAL`) VALUES
-(14, 'Joservid', '45565454', 4, '2016-12-11', 128726);
+INSERT INTO `lista_pedidos` (`ID`, `USUARIO`, `DNI_NIF`, `ID_DIR`, `FECHA`, `PRECIO_TOTAL`, `ACEPTADO`) VALUES
+(4, 'Jose', '05722193T', 9, '2017-01-03', 72, 1),
+(5, 'Jose', '05722193T', 9, '2017-01-08', 112, 0);
 
 -- --------------------------------------------------------
 
@@ -180,10 +179,10 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`ID`, `ID_LISTA_PED`, `REF`, `PRECIO`, `CANTIDAD`) VALUES
-(6, 14, '455dfs', 64363, 1),
-(7, 14, '455dfs', 64363, 1),
-(8, 14, '455dfs', 64363, 1),
-(9, 14, '455dfs', 64363, 1);
+(1, 4, '455dfs', 32, 1),
+(2, 4, 'hghg', 40, 1),
+(3, 5, 'hghg', 20, 2),
+(4, 5, '455dfs', 32, 1);
 
 -- --------------------------------------------------------
 
@@ -195,7 +194,7 @@ CREATE TABLE `producto` (
   `REF` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `NOMBRE` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `DESCRIPCION` varchar(500) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `ID_CATEGORIA` int(11) NOT NULL,
+  `ID_CATEGORIA` int(11) DEFAULT NULL,
   `ID_SUBCATEGORIA` int(11) DEFAULT NULL,
   `PRECIO1` int(11) NOT NULL,
   `PRECIO2` int(11) NOT NULL,
@@ -208,8 +207,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`REF`, `NOMBRE`, `DESCRIPCION`, `ID_CATEGORIA`, `ID_SUBCATEGORIA`, `PRECIO1`, `PRECIO2`, `FICHA`, `IMAGEN`) VALUES
-('455dfs', 'Laca blanca', 'gghgjkjjhgdfsdaddghj', 3, 1, 32423, 64363, '', 'IMG_2966_Masquelack_443-25.png'),
-('ertert', 'erter', 'ertert', 1, 1, 345345, 345345, 'sia.png', 'masquelack.jpg');
+('455dfs', 'Laca blanc', 'gghgjkjjhgdfsdaddghj', 6, 5, 32, 30, 'GÓMEZ ÁLVAREZ JOSÉ LUIS.pdf', 'IMG_2966_Masquelack_443-25.png'),
+('ertert', 'Acabado PU 20', 'Acabado poliuretano 20 litros', 6, 7, 40, 35, 'Curriculum2(1).pdf', 'IMG_2966_Masquelack_443-25.png'),
+('hghg', 'Laca acabado 20', 'Laca acabado blanca 20 litros', 6, 5, 40, 35, 'Curriculum2(1).pdf', 'IMG_2966_Masquelack_443-25.png');
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ INSERT INTO `roles` (`ID`, `NOMBRE`) VALUES
 
 CREATE TABLE `subcategoria` (
   `ID` int(11) NOT NULL,
-  `ID_CATEGORIA` int(11) NOT NULL,
+  `ID_CATEGORIA` int(11) DEFAULT NULL,
   `NOMBRE` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -248,7 +248,12 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`ID`, `ID_CATEGORIA`, `NOMBRE`) VALUES
-(1, 1, 'Laca');
+(2, 5, 'Lijas'),
+(5, 6, 'Lacas'),
+(6, 6, 'Al agua'),
+(7, 6, 'Acabados'),
+(8, 6, 'Fondo'),
+(9, 6, 'Endurecedor');
 
 -- --------------------------------------------------------
 
@@ -271,8 +276,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`NOMBRE`, `PASSWORD`, `EMAIL`, `ROL`, `UsuarioConfirmado`, `ContrasenyaCambiada`) VALUES
 ('admin', 'admin', 'ComercialAndaser@gmail.com', 1, 1, 1),
-('Joservid', 'joservid', 'joservid@live.com', 3, 1, 1),
-('sdfsdf', '4SJHGNO7R0J8', 'sfdsdf', 2, 0, 0);
+('Jose', 'jose', 'joseluis.gomezalvarez94@gmail.com', 2, 1, 1),
+('Joservid', 'joservid', 'joservid@live.com', 3, 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -389,22 +394,22 @@ ALTER TABLE `caracteristica`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `lista_pedidos`
 --
 ALTER TABLE `lista_pedidos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
@@ -414,7 +419,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --
@@ -435,8 +440,8 @@ ALTER TABLE `caracteristica`
 -- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`NOMBRE`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`ID_DIRECCION`) REFERENCES `direccion` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`ID_DIRECCION`) REFERENCES `direccion` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_ibfk_3` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`NOMBRE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `empresa`
@@ -449,8 +454,8 @@ ALTER TABLE `empresa`
 -- Filtros para la tabla `lista_pedidos`
 --
 ALTER TABLE `lista_pedidos`
-  ADD CONSTRAINT `lista_pedidos_ibfk_2` FOREIGN KEY (`USUARIO`) REFERENCES `usuario` (`NOMBRE`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `lista_pedidos_ibfk_3` FOREIGN KEY (`ID_DIR`) REFERENCES `direccion` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `lista_pedidos_ibfk_3` FOREIGN KEY (`ID_DIR`) REFERENCES `direccion` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `lista_pedidos_ibfk_4` FOREIGN KEY (`USUARIO`) REFERENCES `usuario` (`NOMBRE`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pedido`
@@ -463,14 +468,14 @@ ALTER TABLE `pedido`
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `producto_ibfk_4` FOREIGN KEY (`ID_SUBCATEGORIA`) REFERENCES `subcategoria` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `producto_ibfk_4` FOREIGN KEY (`ID_SUBCATEGORIA`) REFERENCES `subcategoria` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_ibfk_5` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  ADD CONSTRAINT `subcategoria_ibfk_1` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`ID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `subcategoria_ibfk_1` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`
